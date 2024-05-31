@@ -1,2 +1,0 @@
-access_control.md
-api_testing.md
