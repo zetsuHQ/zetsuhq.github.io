@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zetsu's personal blog</title>
-    <link rel="stylesheet" href="../style/writeups.css">
+    <title>zetsu's blog</title>
+    <link rel="stylesheet" href="/style/writeups.css">
 </head>
 
 <body>
-    <header id="header">
-        <div id="header-container">
-            <nav id="navbar">
-                <a href="/">Home</a>
-                <div id="content-links">
-                    <a href="#">Writeups</a>
-                    <!-- <a href="posts">Posts</a> -->
+    <div class="body-wrapper">
+        <header>
+            <nav class="header_navbar">
+                <a class="header_nav-links" href="/">Home</a>
+                <div class="page-links">
+                    <a class="header_nav-links" href="/writeups">Writeups</a>
+                    <a class="header_nav-links" href="/posts">Posts</a>
                 </div>
             </nav>
-        </div>
-    </header>
+        </header>
 
-    <section id="content">
-        <div class="item">
-            <a href="../writeups/portswigger/">
-                <img class="item-image" src="../assets/portswigger.png" alt="PortSwigger logo">
+        <div class="go-back">
+            <a href="..">
+                <img src="/assets/arrow-back.svg" alt="" width="10px">
             </a>
-            <a class="item-link" href="../writeups/portswigger/">PortSwigger</a>
+            <a href="..">Back</a>
         </div>
-        <div class="item">
-            <a class="item-image-link" href="../writeups/hackthebox/">
-                <img class="item-image" src="../assets/hackthebox-green.png" alt="HackTheBox logo">
-            </a>
-            <a class="item-link" href="../writeups/hackthebox/">HackTheBox</a>
-        </div>
-    </section>
-
-    <div id="footer">
-        <div id="footer-container">
-            <div id="main-footer-block">
-                <nav>
-                    <!-- need to make these links work. it's supposed to be <a> tag -->
-                    <button class="social-link">
-                        <div class="img-container">
-                            <img src="../assets/bxl-github.svg" alt="Github" title="Github">
-                        </div>
-                    </button>
-                    <button class="social-link">
-                        <div class="img-container"></div>
-                        <img src="../assets/hackthebox-svgrepo-com.svg" alt="HackTheBox" title="HackTheBox">
-                    </button>
-                    <button class="social-link">
-                        <img src="../assets/bxl-linkedin-square.svg" alt="LinkedIn" title="LinkedIn">
-                    </button>
-                </nav>
+        <div class="main-content">
+            <div class="platform-links">
+                <div class="link-group">
+                    <a class="img-links" href="/writeups/portswigger/">
+                        <img class="platform-logo" src="/assets/portswigger.png" alt="PortSwigger" title="HackTheBox">
+                    </a>
+                    <a href="/writeups/portswigger/">PortSwigger</a>
+                </div>
+                <div class="link-group">
+                    <a class="img-links" href="/writeups/hackthebox/">
+                        <img class="platform-logo" src="/assets/hackthebox-green.png" alt="HackTheBox" title="HackTheBox">
+                    </a>
+                    <a href="/writeups/hackthebox/">HackTheBox</a>
+                </div>
             </div>
         </div>
+
+        <footer>
+            <nav class="footer_social-navbar">
+                <a href="https://app.hackthebox.com/users/1528410">
+                    <img src="/assets/hackthebox.svg" alt="HackTheBox" title="HackTheBox" width="25px" height="25px">
+                </a>
+                <a href="https://linkedin.com/in/zetsu">
+                    <img src="/assets/linkedin.svg" alt="LinkedIn" title="LinkedIn" width="25px" height="25px">
+                </a>
+                <a href="https://github.com/zetsuHQ">
+                    <img src="/assets/github.svg" alt="GitHub" title="GitHub" width="25px" height="25px">
+                </a>
+            </nav>
+        </footer>
     </div>
 </body>
+
 </html>
