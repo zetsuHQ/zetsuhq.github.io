@@ -92,3 +92,7 @@ img {
 hr {
     width: 100%;
 }
+
+code {
+    max-width: 100%;
+}
