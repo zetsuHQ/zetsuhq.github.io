@@ -1,0 +1,47 @@
+baseURL: https://zetsu.ninja/
+languageCode: en-us
+title: zetsu
+theme: hextra
+
+menu:
+  main:
+    - name: Book
+      pageref: /book
+      weight: 1
+    # - name: Blog
+    #   pageref: /blog
+    #   weight: 2
+    # - name: About
+    #   pageref: /about
+    #   weight: 3
+
+params:
+  displayUpdatedDate: true
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: logo.png
+      dark: logo.png
+      link: /
+      width: 40
+      height: 20
+  theme:
+    default: system
+    displayToggle: true
+
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
+  pt:
+    languageName: Portuguese
+    weight: 2
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+      smartypants: true
+      typographer: true
