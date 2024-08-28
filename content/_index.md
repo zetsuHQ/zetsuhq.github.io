@@ -19,7 +19,7 @@ Here's where you can find me:
 
 {{< cards >}}
   {{< card link="https://github.com/zetsuhq" title="GitHub" icon="github" >}}
+  {{< card link="https://app.hackthebox.com/users/1528410" title="HackTheBox" icon="hackthebox" >}}
   {{< card link="https://linkedin.com/in/zetsu" title="LinkedIn" icon="linkedin" >}}
   {{< card link="https://x.com/prplzetsu" title="Twitter" icon="x-twitter" >}}
-  {{< card link="https://app.hackthebox.com/users/1528410" title="HackTheBox" icon="hackthebox" >}}
 {{< /cards >}}

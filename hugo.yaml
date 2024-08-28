@@ -35,9 +35,9 @@ languages:
   en:
     languageName: English
     weight: 1
-  pt:
-    languageName: Portuguese
-    weight: 2
+  # pt:
+  #   languageName: Portuguese
+  #   weight: 2
 
 markup:
   goldmark:
