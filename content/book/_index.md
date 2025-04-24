@@ -7,7 +7,7 @@ draft = false
     type = 'docs'
 +++
 
-The following is a collection of writeups, personal notes and mini-essays. This is just a personal record, so don't take it too seriously.
+The following is a collection of writeups and personal notes.
 
 {{< cards >}}
   {{< card link="/book/portswigger/" title="PortSwigger Web Security Academy" >}}

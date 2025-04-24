@@ -1,7 +1,6 @@
 baseURL: https://zetsu.ninja/
 languageCode: en-us
 title: zetsu
-theme: hextra
 
 menu:
   main:
@@ -21,8 +20,8 @@ params:
     displayTitle: true
     displayLogo: true
     logo:
-      path: logo.png
-      dark: logo.png
+      path: images/shade.png
+      dark: images/shade.png
       link: /
       width: 40
       height: 20
@@ -36,7 +35,7 @@ languages:
     languageName: English
     weight: 1
   # pt:
-  #   languageName: Portuguese
+  #   languageName: Português
   #   weight: 2
 
 markup:
@@ -45,3 +44,7 @@ markup:
       unsafe: true
       smartypants: true
       typographer: true
+
+module:
+  imports:
+    - path: github.com/imfing/hextra

